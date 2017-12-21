@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core';
+import { AuthService } from '../auth/auth.service';
+//Components
 import { HeaderComponent } from './header/header.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 
@@ -14,7 +16,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
     HeaderComponent
   ],
   providers: [
-
+    AuthService
   ]
 })
 export class CoreModule {}
