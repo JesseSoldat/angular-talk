@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-md-10 col-md-offset-1">
+      <h2>{{formType}}</h2>
+      <form #f="ngForm" (ngSubmit)="onSubmit(f)" class="well">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input class="form-control" required email name="email" ngModel>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input class="form-control" required type="password" name="password" ngModel>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary" type="submit" [disabled]="!f.form.valid">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

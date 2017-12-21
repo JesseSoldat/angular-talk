@@ -12,4 +12,10 @@ import { log } from 'util';
 export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
+
+  formSubmitted(user) {
+    console.log(user);
+  }
+
+  
 }
