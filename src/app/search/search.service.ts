@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Jsonp } from '@angular/http';
+//YOU WILL NEED YOUR OWN KEY VISIT themoviedb API
 import { API_KEY } from '../config';
 //Firebase
 import { AngularFireDatabase } from 'angularfire2/database';
 
 @Injectable()
 export class SearchService {
-  apiKey = API_KEY; //themoviedb API
+  apiKey = API_KEY; 
   baseUrl = 'https://api.themoviedb.org/3/';
   callBack = 'callback=JSONP_CALLBACK';
   popular = 'sort_by=popularity.desc';

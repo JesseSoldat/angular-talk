@@ -9,8 +9,16 @@ import { SearchService } from './search.service';
 
 export class SearchComponent {
   constructor(private searchService: SearchService) {
-    searchService.searchMovies('Star Wars').subscribe(results => {
-      console.log(results);
-    })
+    // searchService.searchMovies('Star Wars').subscribe(results => {
+    //   console.log(results);
+    // })
+  }
+
+  searchDatabase(searchText) {
+    // console.log(searchText);
+    this.searchService.searchMovies(searchText)
+      .subscribe(results => {
+        console.log(results);
+      });
   }
 }

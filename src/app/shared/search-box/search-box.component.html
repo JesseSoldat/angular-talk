@@ -1,0 +1,21 @@
+
+<div class="col-sm-6 col-xs-12">
+  <div class="input-group">
+    <input type="text" 
+      class="form-control" 
+      [placeholder]="placeholder"
+      [(ngModel)]="searchStr"
+      (ngModelChange)="onChange()"
+
+    >
+    <span class="input-group-btn">
+      <button *ngIf="showButton" class="btn btn-primary" type="button">
+        {{buttonText}}
+      </button>
+    </span>
+  </div>
+</div>
+
+
+
+

@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { SharedModule } from '../shared/shared.module';
 import { SearchRoutingModule } from './search-routing.module';
 import { SearchComponent } from './search.component';
 
@@ -7,6 +8,7 @@ import { SearchComponent } from './search.component';
     SearchComponent
   ],
   imports: [
+    SharedModule,
     SearchRoutingModule
   ]
 })
