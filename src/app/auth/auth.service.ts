@@ -13,11 +13,20 @@ export class AuthService {
 
     emailRegister(email: string, password: string) {
       this.afAuth.auth.createUserWithEmailAndPassword(email, password).then(user => {
-        console.log('User created', user);
-        this.message.next('The User was Created');
+        // this.message.next('The User was Created');
+        
       })
       .catch(err => {
         console.log(err.message);
+        this.message.next(err.message);
+      });
+    }
+
+    emailLogin(email: string, password: string) {
+      this.afAuth.auth.signInWithEmailAndPassword(email, password).then(user => {
+        this.message.next('Logged in Successfully');
+      })
+      .catch(err => {
         this.message.next(err.message);
       });
     }

@@ -12,18 +12,30 @@
       <a href="#" class="navbar-brand">
         Movie Buddy
       </a>
+      <ul class="nav navbar-nav navbar-left">
+        <li>
+          <a href="#"
+             (click)="onNavigate($event, 'dashboard')"
+          >
+            Dashboard
+          </a>
+        </li>
+        <li>
+          <!-- <a routerLink="/dashboard">Dashboard</a> -->
+        </li>
+      </ul>
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li>
           <a href="#" 
-            (click)="onRegister($event)"
+            (click)="onNavigate($event, 'register')"
           >Register
           </a>
         </li>
         <li>
           <a href="#"
-           (click)="onLogin($event)"
+           (click)="onNavigate($event, 'login')"
           >Login</a>
         </li>
       </ul>

@@ -15,10 +15,6 @@ export class AuthFormComponent {
   @Input() message: string;
   @Output() formSubmitted = new EventEmitter<User>();
 
-  constructor() {
-    console.log(this.message);
-  }
-
   onSubmit(form) {
     const user: User = {
       email: form.value.email,

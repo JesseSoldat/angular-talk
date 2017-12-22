@@ -9,13 +9,9 @@ import { Router } from '@angular/router';
 export class HeaderComponent {
   constructor(private router: Router) {}
 
-  onRegister(e) {
+  onNavigate(e, route) {
     e.preventDefault();
-    this.router.navigate(['register']);
+    this.router.navigate([route]);
   }
 
-  onLogin(e) {
-    e.preventDefault();
-    this.router.navigate(['login']);
-  }
 }

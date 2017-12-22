@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { AuthModule } from './auth/auth.module';
 
+
 @NgModule({
   declarations: [
     AppComponent
@@ -17,7 +18,7 @@ import { AuthModule } from './auth/auth.module';
     BrowserModule,
     AppRoutingModule,
     CoreModule,
-    AuthModule,
+    AuthModule
 
   ],
   providers: [],
