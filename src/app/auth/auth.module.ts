@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+
 //Components
 import { AuthFormComponent } from './form/auth-form.component';
 import { RegisterComponent } from './register/register.component';
