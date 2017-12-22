@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-//Third Party Modules
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { environment } from '../../environments/environment';
+import { HttpModule, JsonpModule } from '@angular/http';
+//Modules
+import { SharedModule } from '../shared/shared.module';
 //Services
+import { SearchService } from '../search/search.service';
 import { AuthService } from '../auth/auth.service';
 //Components
 import { HeaderComponent } from './header/header.component';
@@ -19,16 +17,17 @@ import { WelcomeComponent } from './welcome/welcome.component';
   ],
   imports: [
     RouterModule,
-    CommonModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule,
-    AngularFireAuthModule
+    SharedModule,
+    HttpModule,
+    JsonpModule
   ],
   exports: [
     HeaderComponent
   ],
   providers: [
-    AuthService
+    AuthService,
+    SearchService
+
   ]
 })
 export class CoreModule {}

@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import * as firebase from 'firebase';
+
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';

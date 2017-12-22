@@ -9,7 +9,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
     DashboardComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
     DashboardRoutingModule
   ]
 })

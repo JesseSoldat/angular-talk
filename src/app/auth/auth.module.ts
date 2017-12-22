@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 
 //Components
 import { AuthFormComponent } from './form/auth-form.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 
-
+import { SharedModule } from '../shared/shared.module';
 import { AuthRoutingModule } from './auth-routing.module';
 
 @NgModule({
@@ -16,7 +15,7 @@ import { AuthRoutingModule } from './auth-routing.module';
     LoginComponent
   ],
   imports: [
-    FormsModule,
+    SharedModule,
     AuthRoutingModule
   ]
 })
