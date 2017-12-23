@@ -10,11 +10,10 @@ import { DataStoreService } from '../data-store.service';
 export class CardComponent {
   @Input() movie;
 
-  constructor(private router: Router
+  constructor(private router: Router,
               private dataStoreService: DataStoreService) {}
 
   movieDetails(movie) {
-    // console.log(movie);
     this.dataStoreService.changeCurrentMovie(movie);
     this.router.navigate(['movie-details']);
   }
