@@ -1,0 +1,35 @@
+.movieTitle {
+	display: block;
+	margin: 0 auto;
+	margin-bottom: 1%;
+	padding: 0;
+	padding-bottom: 1%;
+	text-align: center;
+}
+
+.movieCard {
+  height: 530px;
+  width: 100%;
+  position: relative;
+  margin-bottom: 3%;
+}
+
+.movieImage {
+  vertical-align: middle;
+  width: 80%;
+  height: 400px;
+  display: block;
+  margin: 0 auto;
+  box-shadow: 10px 10px 15px #888888;
+	border-radius: 2%;	
+}
+
+.movieInfoGroup {
+	margin-top: 2%;
+}
+
+.movieBtnGroup {
+	width: 80%;
+	display: block;
+	margin: 0 auto;
+}

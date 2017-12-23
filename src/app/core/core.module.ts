@@ -6,6 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 //Services
 import { SearchService } from '../search/search.service';
 import { AuthService } from '../auth/auth.service';
+import { DataStoreService } from '../shared/data-store.service';
 //Components
 import { HeaderComponent } from './header/header.component';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -26,7 +27,8 @@ import { WelcomeComponent } from './welcome/welcome.component';
   ],
   providers: [
     AuthService,
-    SearchService
+    SearchService,
+    DataStoreService
 
   ]
 })

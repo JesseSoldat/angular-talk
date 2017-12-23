@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { environment } from '../../environments/environment';
 //Components
 import { SearchBoxComponent } from './search-box/search-box.component';
+import { CardComponent } from './card/card.component';
 //Third Party
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -12,7 +13,8 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 @NgModule({
   declarations: [
-    SearchBoxComponent
+    SearchBoxComponent,
+    CardComponent
   ],
   imports: [
     CommonModule,
@@ -23,6 +25,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
   ],
   exports: [
     SearchBoxComponent,
+    CardComponent,
     CommonModule,
     FormsModule
     

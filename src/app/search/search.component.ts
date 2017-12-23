@@ -8,6 +8,8 @@ import { SearchService } from './search.service';
 })
 
 export class SearchComponent {
+  movies;
+
   constructor(private searchService: SearchService) {
     // searchService.searchMovies('Star Wars').subscribe(results => {
     //   console.log(results);
@@ -17,8 +19,10 @@ export class SearchComponent {
   searchDatabase(searchText) {
     // console.log(searchText);
     this.searchService.searchMovies(searchText)
-      .subscribe(results => {
-        console.log(results);
+      .subscribe(response => {
+        // console.log(response.results);
+        this.movies = response.results;
+
       });
   }
 }

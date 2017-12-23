@@ -13,8 +13,7 @@ export class AuthService {
 
     emailRegister(email: string, password: string) {
       this.afAuth.auth.createUserWithEmailAndPassword(email, password).then(user => {
-        // this.message.next('The User was Created');
-        
+        // this.message.next('The User was Created');     
       })
       .catch(err => {
         console.log(err.message);
