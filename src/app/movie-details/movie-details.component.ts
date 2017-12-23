@@ -27,6 +27,11 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
       }
       this.movie = movie;
     });
+    console.log(this.movie)
+  }
+
+  onNavigate(route) {
+    this.router.navigate([route]);
   }
 
   ngOnDestroy() {

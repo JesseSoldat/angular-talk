@@ -29,7 +29,59 @@
           >
         </div>
 
-        <div class="col-xs-12 col-md-6"></div>
+        <div class="col-xs-12 col-md-6">
+          <ul class="list-group">
+            <li class="list-group-item"
+              *ngIf="movie.original_title">
+              <strong>Original Title: </strong><br>
+              <br>
+              {{movie.original_title}}
+            </li>
+
+            <li class="list-group-item"
+              *ngIf="movie.release_date">
+              <strong>Release Date: </strong><br>
+              <br>
+              {{movie.release_date}}
+            </li>
+
+            <li class="list-group-item" *ngIf="movie.vote_average">
+              <strong>Rating: </strong><br>
+              <br>
+              {{movie.vote_average}}
+            </li>
+
+            <!-- <li class="list-group-item"
+              *ngIf="movie.production_companies && movie.production_companies.length > 1">
+              <strong>Production Companies: </strong>
+              <div *ngFor="let company of movie.production_companies">
+                {{company}}
+              </div>
+            </li> -->
+            <li class="list-group-item"
+              *ngIf="movie.overview">
+              <strong>Description: </strong><br>
+              <br>
+              {{movie.overview}}
+            </li>
+
+            <li class="list-group-item"
+              *ngIf="movie.homepage">
+              <strong>Home Page: </strong><br>
+              <br>
+              <a href={{movie.homepage}} target="_blank">
+                {{movie.homepage}}
+              </a>
+            </li>
+
+            <div>
+              <button class="btn btn-primary"
+                (click)="onNavigate('search')">
+                Go Back
+              </button>
+            </div>
+          </ul>
+        </div>
       </div>
     </div>
 
