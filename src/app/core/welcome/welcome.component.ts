@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { enterTitleTrigger, hoverStateTrigger } from './welcome.animations';
+import { enterTitleTrigger, enterImageTrigger } from './welcome.animations';
 
 @Component({
   selector: 'app-welcome',
@@ -8,19 +8,17 @@ import { enterTitleTrigger, hoverStateTrigger } from './welcome.animations';
   styleUrls: ['./welcome.component.scss'],
   animations: [
     enterTitleTrigger,
-    hoverStateTrigger
+    enterImageTrigger
   ]
 })
 export class WelcomeComponent implements OnInit {
   titleState = 'default';
-  imgState = 'default';
+  imageState = 'default';
 
   constructor() { }
 
   ngOnInit() {
-    setTimeout(() => {
-      this.titleState = 'enter';
-    }, 200);
+  
   }
 
 }
