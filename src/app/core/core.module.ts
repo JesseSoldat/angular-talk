@@ -29,6 +29,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
   providers: [
     AuthService,
     SearchService,
+    FavoritesService,
     DataStoreService
 
   ]

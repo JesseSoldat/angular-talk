@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-
+import { Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-register',
@@ -9,17 +9,24 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./register.component.scss']
 })
 
-export class RegisterComponent {
+export class RegisterComponent implements OnInit, OnDestroy {
   message: string;
+  subscription: Subscription;
 
-  constructor(private authService: AuthService) {
-    authService.message.subscribe(msg => {
+  constructor(private authService: AuthService) {}
+
+  ngOnInit() {
+    this.subscription = this.authService.message.subscribe(msg => {
       this.message = msg;
     });
   }
 
   formSubmitted({email, password}) {
     this.authService.emailRegister(email, password);
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   

@@ -9,6 +9,7 @@ import { DataStoreService } from '../../services/data-store.service';
 })
 export class CardComponent {
   @Input() movie;
+  @Output() onAddToFavorites = new EventEmitter();
 
   constructor(private router: Router,
               private dataStoreService: DataStoreService) {}
@@ -17,6 +18,10 @@ export class CardComponent {
   movieDetails(movie) {
     this.dataStoreService.changeCurrentMovie(movie);
     this.router.navigate(['movie-details', { id: movie.id }]);
+  }
+
+  addToFavorites(id) {
+    this.onAddToFavorites.emit(id);
   }
 
 }

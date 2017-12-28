@@ -15,6 +15,7 @@
       <ul class="nav navbar-nav navbar-left">
         <li>
           <a href="#"
+             *ngIf="uid != null"
              (click)="onNavigate($event, 'dashboard')"
           >
             Dashboard
@@ -29,23 +30,36 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
           <a href="#" 
+            *ngIf="uid === null"
             (click)="onNavigate($event, 'register')"
           >Register
           </a>
         </li>
         <li>
           <a href="#"
+            *ngIf="uid === null"
            (click)="onNavigate($event, 'login')"
           >Login</a>
         </li>
         <li>
-          <a href="#" (click)="onNavigate($event, 'search')">
+          <a href="#" 
+            *ngIf="uid != null"
+            (click)="onNavigate($event, 'search')">
             Search
           </a>
         </li>
         <li>
-          <a href="#" (click)="onNavigate($event, 'favorites')">
+          <a href="#" 
+            *ngIf="uid != null"
+            (click)="onNavigate($event, 'favorites')">
             Favorites
+          </a>
+        </li>
+        <li>
+          <a href="#" 
+          *ngIf="uid !== null" 
+          (click)="onLogout($event)">
+            Logout
           </a>
         </li>
       </ul>

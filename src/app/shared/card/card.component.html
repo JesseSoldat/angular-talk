@@ -14,7 +14,9 @@
   >
   <div class="movieInfoGroup">
     <div class="movieBtnGroup">
-      <button class="btn btn-secondary pull-right">
+      <button class="btn btn-secondary pull-right"
+        (click)="addToFavorites(movie.id)"
+      >
         <i class="fa fa-heart-o">
         </i>
       </button>
