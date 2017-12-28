@@ -1,8 +1,8 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
-import { DataStoreService } from '../shared/data-store.service';
-import { SearchService } from '../search/search.service';
+import { DataStoreService } from '../services/data-store.service';
+import { SearchService } from '../services/search.service';
 
 @Component({
   selector: 'app-movie-details',

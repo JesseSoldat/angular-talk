@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { DataStoreService } from '../data-store.service';
+import { DataStoreService } from '../../services/data-store.service';
 
 @Component({
   selector: 'app-card',

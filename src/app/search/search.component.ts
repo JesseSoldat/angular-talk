@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { SearchService } from './search.service';
-import { DataStoreService } from '../shared/data-store.service';
+import { SearchService } from '../services/search.service';
+import { DataStoreService } from '../services/data-store.service';
 
 @Component({
   selector: 'app-search',
