@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SearchService } from './search.service';
 import { DataStoreService } from '../shared/data-store.service';
 
@@ -8,16 +8,27 @@ import { DataStoreService } from '../shared/data-store.service';
   styleUrls: ['./search.component.scss']
 })
 
-export class SearchComponent implements OnInit {
-  currentSearchResults$;
+export class SearchComponent implements OnInit, OnDestroy {
+  currentSearchResults = [];
+  subscription;
 
   constructor(private searchService: SearchService,
               private dataStoreService: DataStoreService) {}
 
   ngOnInit() {
-    this.currentSearchResults$ = this.dataStoreService.currentSearchResults;   
+    this.subscription = this.dataStoreService.currentSearchResults
+      .subscribe(results => {
+        if(results === null) {
+          this.currentSearchResults = JSON.parse(localStorage.getItem('currentSearchResults'));
+          if(this.currentSearchResults === null ) {
+            this.currentSearchResults = [];
+            return;
+          }
+        } else {
+          this.currentSearchResults = results;          
+        }
+    }); 
   }
-
 
 
   searchDatabase(searchText) {
@@ -29,5 +40,9 @@ export class SearchComponent implements OnInit {
         this.dataStoreService.changeCurrentSearch(response.results);
 
       });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }
