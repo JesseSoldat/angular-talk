@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { HttpModule, JsonpModule } from '@angular/http';
 //Modules
 import { SharedModule } from '../shared/shared.module';
@@ -19,12 +20,14 @@ import { WelcomeComponent } from './welcome/welcome.component';
   ],
   imports: [
     RouterModule,
+    BrowserAnimationsModule,
     SharedModule,
     HttpModule,
     JsonpModule
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+    BrowserAnimationsModule
   ],
   providers: [
     AuthService,

@@ -1,8 +1,11 @@
-<div class="container">
-  <h1>Welcome to Movie Buddy</h1>
+<div class="titleContainer container">
+  <h1 [@enterTitle]="titleState" class="title">Welcome to Movie Buddy</h1>
 </div>
 <div class="row">
   <div class="col-xs-12">
-      <img class="filmstrip" src="../../assets/filmstrip.jpg" alt="">
+    <div class="filmContainer">
+      <img [@hoverState]="imgState" class="filmstrip"
+        src="../../assets/filmstrip.jpg" alt="">
+    </div>  
   </div>
 </div>

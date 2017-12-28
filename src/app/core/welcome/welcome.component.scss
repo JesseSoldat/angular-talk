@@ -1,3 +1,17 @@
-.filmstrip {
-  width: 100%;
+.titleContainer {
+  margin-bottom: 30px;
+
+  .title {
+    
+  }
+}
+.filmContainer {
+  margin: 0 auto;
+
+  .filmstrip {
+    opacity: 0;
+    width: 0%;
+    margin: 0 auto;
+    display: block;
+  }
 }
