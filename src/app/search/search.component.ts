@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SearchService } from './search.service';
+import { DataStoreService } from '../shared/data-store.service';
 
 @Component({
   selector: 'app-search',
@@ -7,21 +8,25 @@ import { SearchService } from './search.service';
   styleUrls: ['./search.component.scss']
 })
 
-export class SearchComponent {
-  movies;
+export class SearchComponent implements OnInit {
+  currentSearchResults$;
 
-  constructor(private searchService: SearchService) {
-    // searchService.searchMovies('Star Wars').subscribe(results => {
-    //   console.log(results);
-    // })
+  constructor(private searchService: SearchService,
+              private dataStoreService: DataStoreService) {}
+
+  ngOnInit() {
+    this.currentSearchResults$ = this.dataStoreService.currentSearchResults;   
   }
+
+
 
   searchDatabase(searchText) {
     // console.log(searchText);
     this.searchService.searchMovies(searchText)
       .subscribe(response => {
         // console.log(response.results);
-        this.movies = response.results;
+        // this.movies = response.results;
+        this.dataStoreService.changeCurrentSearch(response.results);
 
       });
   }

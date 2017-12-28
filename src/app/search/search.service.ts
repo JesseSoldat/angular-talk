@@ -17,7 +17,12 @@ export class SearchService {
 
     searchMovies(term: string) {
       return this.jsonp.get(`${this.baseUrl}search/movie?query=${term}&${this.popular}&api_key=${this.apiKey}&${this.callBack}`)
-        .map(result => result.json());
+        .map(response => response.json());
+    }
+  
+    searchMovie(id: string) {
+      return this.jsonp.get(`${this.baseUrl}movie/${id}?api_key=${this.apiKey}&${this.callBack}`)
+        .map(response => response.json());
     }
 
 

@@ -13,9 +13,10 @@ export class CardComponent {
   constructor(private router: Router,
               private dataStoreService: DataStoreService) {}
 
+
   movieDetails(movie) {
     this.dataStoreService.changeCurrentMovie(movie);
-    this.router.navigate(['movie-details']);
+    this.router.navigate(['movie-details', { id: movie.id }]);
   }
 
 }

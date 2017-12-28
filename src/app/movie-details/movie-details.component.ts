@@ -1,7 +1,8 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
-import { DataStoreService } from '../shared/data-store.service';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
+import { DataStoreService } from '../shared/data-store.service';
+import { SearchService } from '../search/search.service';
 
 @Component({
   selector: 'app-movie-details',
@@ -9,25 +10,39 @@ import { Subscription } from 'rxjs/Subscription';
   styleUrls: ['./movie-details.component.scss']
 }) 
 export class MovieDetailsComponent implements OnInit, OnDestroy {
-  movie;
+  movie = {};
   subscription: Subscription;
   
   constructor(private dataStoreService: DataStoreService,
-              private router: Router) {}
+              private searchService: SearchService,
+              private router: Router,
+              private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.subscription = this.dataStoreService.currentMovie.subscribe(movie => {
-      if(movie === null) {
-        this.movie = JSON.parse(localStorage.getItem('currentMovie'));
-       if(this.movie === null) {
-         this.movie = {};
-         this.router.navigate(['search']);
-       }
-        return;
-      }
-      this.movie = movie;
-    });
-    console.log(this.movie)
+
+    this.subscription = this.route.params
+      .subscribe(params => {
+        // console.log(params);
+        this.searchService.searchMovie(params.id)
+          .subscribe(movie => {
+            this.movie = movie;
+          });
+      });
+
+    
+
+    // this.subscription = this.dataStoreService.currentMovie.subscribe(movie => {
+    //   if(movie === null) {
+    //     this.movie = JSON.parse(localStorage.getItem('currentMovie'));
+    //    if(this.movie === null) {
+    //      this.movie = {};
+    //      this.router.navigate(['search']);
+    //    }
+    //     return;
+    //   }
+    //   this.movie = movie;
+    // });
+    // console.log(this.movie);
   }
 
   onNavigate(route) {
