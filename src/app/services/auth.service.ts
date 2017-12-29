@@ -2,12 +2,15 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Injectable() 
 export class AuthService implements OnInit {
-  public message = new BehaviorSubject("");
-  public uid = new BehaviorSubject(null);
+  private message = new BehaviorSubject("");
+  public readonly message$: Observable<string> = this.message.asObservable();
+  private uid = new BehaviorSubject(null);
+  public readonly uid$: Observable<string> = this.uid.asObservable();
 
   constructor(private router: Router,
     private afAuth: AngularFireAuth) {}
@@ -16,15 +19,17 @@ export class AuthService implements OnInit {
       this.getUser();
     }
 
+    clearMessage() {
+      this.message.next('');
+    }
+
     emailRegister(email: string, password: string) {
       this.afAuth.auth.createUserWithEmailAndPassword(email, password).then(user => {
-        // this.message.next('The User was Created');   
         localStorage.setItem('uid', user.uid);  
         this.uid.next(user.uid); 
         this.router.navigate(['dashboard']);                     
       })
       .catch(err => {
-        console.log(err.message);
         this.message.next(err.message);
       });
     }

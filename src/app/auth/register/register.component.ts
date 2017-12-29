@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    this.subscription = this.authService.message.subscribe(msg => {
+    this.subscription = this.authService.message$.subscribe(msg => {
       this.message = msg;
     });
   }

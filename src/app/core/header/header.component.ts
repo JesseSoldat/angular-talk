@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.authService.getUser();
 
-    this.subscription = this.authService.uid.subscribe(uid => {
+    this.subscription = this.authService.uid$.subscribe(uid => {
       this.uid = uid; 
       if(this.uid === null) {
         this.router.navigate(['']);
@@ -29,6 +29,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   onNavigate(e, route) {
     e.preventDefault();
+    this.authService.clearMessage();
     this.router.navigate([route]);
   }
 
