@@ -41,7 +41,9 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   onAddToFavorites(id) {
     this.searchService.searchMovie(id).subscribe(movie => {
-      this.favoritesService.addToFavorites(movie);
+      this.favoritesService.addToFavorites(movie).then(key => {
+        console.log(key);
+      });
     });
   }
 

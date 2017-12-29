@@ -48,13 +48,16 @@ export class AuthService implements OnInit {
 
     getUser() {
       let uid = localStorage.getItem('uid');
-      console.log(uid);
       if(uid !== 'null') {
         this.uid.next(uid);        
         this.router.navigate(['dashboard']);   
         return;                  
       }
       this.uid.next(null);
+    }
+
+    getUid() {
+      return localStorage.getItem('uid');
     }
 
     logout() {

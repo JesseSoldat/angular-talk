@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { HttpModule, JsonpModule } from '@angular/http';
+import { environment } from '../../environments/environment';
+
 //Modules
 import { SharedModule } from '../shared/shared.module';
 //Services
@@ -13,6 +15,13 @@ import { FavoritesService } from '../services/favorites.service';
 import { HeaderComponent } from './header/header.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 
+//Third Party
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+
+
+
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -23,7 +32,10 @@ import { WelcomeComponent } from './welcome/welcome.component';
     BrowserAnimationsModule,
     SharedModule,
     HttpModule,
-    JsonpModule
+    JsonpModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   exports: [
     HeaderComponent,
