@@ -33,7 +33,7 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
 
     
 
-    // this.subscription = this.dataStoreService.currentMovie.subscribe(movie => {
+    // this.subscription = this.dataStoreService.currentMovie$.subscribe(movie => {
     //   if(movie === null) {
     //     this.movie = JSON.parse(localStorage.getItem('currentMovie'));
     //    if(this.movie === null) {

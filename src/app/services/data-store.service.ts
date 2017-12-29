@@ -1,10 +1,16 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
+import Movie from '../models/movie';
 
 @Injectable()
 export class DataStoreService {
-  currentMovie = new BehaviorSubject(null);
-  currentSearchResults = new BehaviorSubject(null);
+  private currentMovie = new BehaviorSubject(null);
+  public readonly currentMovie$: Observable<string> = this.currentMovie.asObservable();
+
+  private currentSearchResults = new BehaviorSubject(null);
+  public readonly currentSearchResults$: Observable<Movie[]> = this.currentSearchResults;
+
 
 
   changeCurrentSearch(searchResults) {

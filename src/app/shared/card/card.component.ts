@@ -11,6 +11,8 @@ export class CardComponent {
   @Input() movie;
   @Input() heart;
   @Output() onAddToFavorites = new EventEmitter();
+  @Output() onDeleteFromFavorites = new EventEmitter();
+  
 
   constructor(private router: Router,
               private dataStoreService: DataStoreService) {}
@@ -23,6 +25,10 @@ export class CardComponent {
 
   addToFavorites(id) {
     this.onAddToFavorites.emit(id);
+  }
+
+  deleteFromFavorites(id) {
+    this.onDeleteFromFavorites.emit(id);
   }
 
 }

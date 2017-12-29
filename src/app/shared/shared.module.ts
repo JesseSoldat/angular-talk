@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { environment } from '../../environments/environment';
+
+
 //Components
 import { SearchBoxComponent } from './search-box/search-box.component';
 import { CardComponent } from './card/card.component';
@@ -21,6 +23,7 @@ import { CardComponent } from './card/card.component';
     CardComponent,
     CommonModule,
     FormsModule
+
     
   ]
 })

@@ -3,6 +3,8 @@ import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { HttpModule, JsonpModule } from '@angular/http';
 import { environment } from '../../environments/environment';
+// import '../../shared/rxjs-extensions';
+
 
 //Modules
 import { SharedModule } from '../shared/shared.module';

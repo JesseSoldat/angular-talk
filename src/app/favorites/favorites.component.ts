@@ -20,9 +20,11 @@ export class FavoritesComponent implements OnInit {
     this.favoritesService.getFavorites().subscribe(data => {
       this.spinner = false;
       this.favorites = data;
-    });
-    ;
-    
+    }); 
+  }
+
+  onDeleteFromFavorites(id) {
+    console.log(id);
   }
 
 }

@@ -31,7 +31,8 @@
     *ngFor="let movie of favorites">
     <app-card 
       [movie]="movie"
-      [heart]="heart">
+      [heart]="heart"
+      (onDeleteFromFavorites)="onDeleteFromFavorites($event)">
     </app-card>
   </div>
 </div>
