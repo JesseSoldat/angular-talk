@@ -19,12 +19,16 @@ export class FavoritesComponent implements OnInit {
 
     this.favoritesService.getFavorites().subscribe(data => {
       this.spinner = false;
-      this.favorites = data;
+      this.favorites = data.reverse();
+      console.log(this.favorites);
     }); 
   }
 
-  onDeleteFromFavorites(id) {
-    console.log(id);
+  onDeleteFromFavorites(movie) {
+    let key = movie.key;
+    console.log(key);
+    this.favoritesService.deleteFromFavorites(key);
+    
   }
 
 }

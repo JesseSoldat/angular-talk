@@ -14,16 +14,23 @@
   >
   <div class="movieInfoGroup">
     <div class="movieBtnGroup">
-      <button class="btn btn-secondary pull-right"
+      <button 
+       *ngIf="!heart"
+        class="btn btn-secondary pull-right"
         (click)="addToFavorites(movie.id)"
-      >
-        <i *ngIf="!heart" class="fa fa-heart redHeart">
-        </i>
-        <i *ngIf="heart" class="fa fa-trash blackTrash"></i>
+         [disabled]="disabled">
+        <i class="fa fa-heart redHeart"></i>
       </button>
+
+      <button *ngIf="heart"
+        class="btn btn-secondary pull-right"
+        (click)="deleteFromFavorites(movie)"
+        [disabled]="disabled">
+        <i  class="fa fa-trash blackTrash"></i>
+      </button>
+
       <button class="btn btn-primary pull-right"
-        (click)="movieDetails(movie)"
-      >
+        (click)="movieDetails(movie)">
         View
       </button>
     </div>

@@ -4,6 +4,7 @@ import { FavoritesService } from '../services/favorites.service';
 import { DataStoreService } from '../services/data-store.service';
 import Movie from '../models/movie';
 import {differenceBy } from 'lodash';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-search',
@@ -12,8 +13,8 @@ import {differenceBy } from 'lodash';
 })
 
 export class SearchComponent implements OnInit, OnDestroy {
-  currentSearchResults = [];
-  subscription;
+  currentSearchResults: Movie[] = [];
+  subscription: Subscription;
   favorites: Movie[];
   heart = false;
 
@@ -22,15 +23,16 @@ export class SearchComponent implements OnInit, OnDestroy {
               private dataStoreService: DataStoreService) {}
 
   ngOnInit() {
+    //get the user's favorites in advance to compare with any new search results 
     this.favoritesService.getFavorites().subscribe(favorites => {
       this.favorites = favorites;
     });
 
+    //get the results from the service first and fall back to localStorage
     this.subscription = this.dataStoreService.currentSearchResults$
       .subscribe(results => {
         if(results === null) {
           this.currentSearchResults = JSON.parse(localStorage.getItem('currentSearchResults'));
-          
           if(this.currentSearchResults === null ) {
             this.currentSearchResults = [];
             return;
@@ -42,15 +44,15 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
 
-  searchDatabase(searchText) {
+  searchDatabase(searchText: string) {
     this.searchService.searchMovies(searchText).subscribe(response => {
       let results = this.compareSearchedWithFavorites(response.results);
       this.dataStoreService.changeCurrentSearch(results);
     });
   }
 
-  onAddToFavorites(id) {
-    
+  onAddToFavorites(id: string) {
+    //get the detailed movie object first to save to firebase
     this.searchService.searchMovie(id).subscribe(movie => {
       this.favoritesService.addToFavorites(movie).then(key => {
         this.currentSearchResults = this.compareSearchedWithFavorites(this.currentSearchResults);

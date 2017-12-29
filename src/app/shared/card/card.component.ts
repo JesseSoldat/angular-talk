@@ -12,6 +12,7 @@ export class CardComponent {
   @Input() heart;
   @Output() onAddToFavorites = new EventEmitter();
   @Output() onDeleteFromFavorites = new EventEmitter();
+  disabled = false;
   
 
   constructor(private router: Router,
@@ -24,11 +25,13 @@ export class CardComponent {
   }
 
   addToFavorites(id) {
+    this.disabled = true;
     this.onAddToFavorites.emit(id);
   }
 
-  deleteFromFavorites(id) {
-    this.onDeleteFromFavorites.emit(id);
+  deleteFromFavorites(movie) {
+    this.disabled = true;    
+    this.onDeleteFromFavorites.emit(movie);
   }
 
 }
