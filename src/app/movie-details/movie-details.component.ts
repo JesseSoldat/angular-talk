@@ -10,8 +10,9 @@ import { SearchService } from '../services/search.service';
   styleUrls: ['./movie-details.component.scss']
 }) 
 export class MovieDetailsComponent implements OnInit, OnDestroy {
-  movie = {};
+  movie;
   subscription: Subscription;
+  spinner = true;
   
   constructor(private dataStoreService: DataStoreService,
               private searchService: SearchService,
@@ -25,6 +26,7 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
         // console.log(params);
         this.searchService.searchMovie(params.id)
           .subscribe(movie => {
+            this.spinner = false;
             this.movie = movie;
           });
       });

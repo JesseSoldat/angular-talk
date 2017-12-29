@@ -15,6 +15,7 @@
       *ngFor="let movie of currentSearchResults">
       <app-card
         [movie]="movie"
+        [heart]="heart"
         (onAddToFavorites)="onAddToFavorites($event)"
       >
       </app-card>

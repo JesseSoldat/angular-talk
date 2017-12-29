@@ -9,15 +9,19 @@ import Movie from '../models/movie';
   styleUrls: ['./favorites.component.scss']
 })
 export class FavoritesComponent implements OnInit {
-  favorites;
+  favorites: Movie[];
+  spinner = true;
+  heart = true;
 
   constructor(private favoritesService: FavoritesService) {}
 
   ngOnInit() {
+
     this.favoritesService.getFavorites().subscribe(data => {
+      this.spinner = false;
       this.favorites = data;
-      console.log(data);
     });
+    ;
     
   }
 

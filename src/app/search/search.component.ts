@@ -12,6 +12,7 @@ import { DataStoreService } from '../services/data-store.service';
 export class SearchComponent implements OnInit, OnDestroy {
   currentSearchResults = [];
   subscription;
+  heart = false;
 
   constructor(private searchService: SearchService,
               private favoritesService: FavoritesService,

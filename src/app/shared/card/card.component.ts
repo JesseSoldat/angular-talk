@@ -9,6 +9,7 @@ import { DataStoreService } from '../../services/data-store.service';
 })
 export class CardComponent {
   @Input() movie;
+  @Input() heart;
   @Output() onAddToFavorites = new EventEmitter();
 
   constructor(private router: Router,

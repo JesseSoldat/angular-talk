@@ -17,8 +17,9 @@
       <button class="btn btn-secondary pull-right"
         (click)="addToFavorites(movie.id)"
       >
-        <i class="fa fa-heart-o">
+        <i *ngIf="!heart" class="fa fa-heart-o">
         </i>
+        <i *ngIf="heart" class="fa fa-heart redHeart"></i>
       </button>
       <button class="btn btn-primary pull-right"
         (click)="movieDetails(movie)"

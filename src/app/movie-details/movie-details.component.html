@@ -1,4 +1,10 @@
-<div class="container">
+<!-- SPINNER -->
+<div class="row" *ngIf="spinner">
+  <div id="spinnerContainer">
+    <i class="fa fa-spinner fa-spin fa-3x fa-fw fa-5x" aria-hidden="true"></i>
+  </div>
+</div>
+<div class="container" *ngIf="movie">
   <div class="panel panel-default">
 
     <div class="panel-heading">
