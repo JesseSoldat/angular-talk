@@ -1,4 +1,4 @@
-<div class="movieCard hidden-xs">
+<div class="movieCard">
   <h4 class="movieTitle">
     {{movie.title}}
   </h4>
@@ -6,10 +6,10 @@
     *ngIf="movie && movie.poster_path"
     src="http://image.tmdb.org/t/p/w500/{{movie.poster_path}}" 
     alt="" 
-    class="thumbnail hidden-xs movieImage"
+    class="thumbnail movieImage"
   >
   <img *ngIf="!movie || !movie.poster_path"
-    class="thumbnail hidden-xs movieImage"
+    class="thumbnail movieImage"
     src="../../../../assets/noFilm.png"
   >
   <div class="movieInfoGroup">

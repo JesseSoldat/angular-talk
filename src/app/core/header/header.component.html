@@ -14,22 +14,15 @@
         class="navbar-brand">
         Movie Buddy
       </a>
-      <ul class="nav navbar-nav navbar-left">
+
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
         <li>
-          <a href="#"
-             *ngIf="uid != null"
-             (click)="onNavigate($event, 'dashboard')"
-          >
+          <a href="#" *ngIf="uid != null" (click)="onNavigate($event, 'dashboard')">
             Dashboard
           </a>
         </li>
-        <li>
-          <!-- <a routerLink="/dashboard">Dashboard</a> -->
-        </li>
-      </ul>
-    </div>
-    <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav navbar-right">
         <li>
           <a href="#" 
             *ngIf="uid === null"
