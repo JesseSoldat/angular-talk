@@ -1,5 +1,6 @@
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { FavoritesService } from '../../services/favorites.service';
+import { AuthService } from '../../services/auth.service';
 
 declare let jQuery: any;
 
@@ -10,10 +11,13 @@ declare let jQuery: any;
 })
 export class ModalComponent implements OnInit, OnChanges {
   @Input() showModal: boolean;
-
   @Output() onHideModal = new EventEmitter();
+  uid: string;
 
-  constructor(private favoritesService: FavoritesService) {}
+  myMovieIds = [];
+
+  constructor(private favoritesService: FavoritesService,
+              private authService: AuthService) {}
 
   ngOnInit() {
     jQuery('#myModal').on('hide.bs.modal', () => {
@@ -38,9 +42,25 @@ export class ModalComponent implements OnInit, OnChanges {
   }
 
   searchUsersList() {
-    this.favoritesService.getOtherUsersLists().subscribe(list => {
-      console.log(list);
+    this.uid = this.authService.getUid();
+    
+    this.favoritesService.getOtherUsersLists().subscribe(usersList => {
+      console.log(usersList);
+      this.getMyMovieIds(usersList);
     });
+  }
+
+  getMyMovieIds(usersList) {
+    usersList.forEach(user => {
+      if(this.uid === user.key) {
+        for(let key in user.movies) {
+          if(user.movies.hasOwnProperty(key)) {
+            this.myMovieIds.push(user.movies[key].id);
+          }
+        }
+      }
+    });
+    console.log(this.myMovieIds);
   }
 
   compareLengths(b, a) {
