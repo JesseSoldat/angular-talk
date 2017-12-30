@@ -36,7 +36,11 @@
         parent="favorites"
         placeholder="Filter your List..."        
         (onFilterText)="onFilterText($event)">
+        <app-search-button buttonText="Search Other's List" 
+          (onSearchUsersMovies)="onSearchUsersMovies()">
+        </app-search-button>
       </app-search-box>
+     
     </div>
   </div>
 
@@ -51,3 +55,9 @@
     </app-card>
   </div>
 </div>
+
+<app-modal 
+  [showModal]="showModal"
+  (onHideModal)="onHideModal()"
+>
+</app-modal>

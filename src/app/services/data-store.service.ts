@@ -11,8 +11,6 @@ export class DataStoreService {
   private currentSearchResults = new BehaviorSubject(null);
   public readonly currentSearchResults$: Observable<Movie[]> = this.currentSearchResults;
 
-
-
   changeCurrentSearch(searchResults) {
     localStorage.setItem('currentSearchResults', JSON.stringify(searchResults));
     this.currentSearchResults.next(searchResults);
@@ -22,4 +20,5 @@ export class DataStoreService {
     localStorage.setItem('currentMovie', JSON.stringify(movie));
     this.currentMovie.next(movie);
   }
+
 }

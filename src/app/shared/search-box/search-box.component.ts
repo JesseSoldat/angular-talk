@@ -21,5 +21,4 @@ export class SearchBoxComponent {
       this.onFilterText.emit(this.searchStr);
     }   
   }
- 
 }

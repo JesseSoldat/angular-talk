@@ -5,11 +5,9 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   templateUrl: './search-button.component.html',
   styleUrls: ['./search-button.component.scss']
 })
-export class SearchBoxComponent {
+export class SearchButtonComponent {
   @Input() buttonText: string;
-  @Input() showButton: boolean;
   @Output() onSearchUsersMovies = new EventEmitter();
-
 
   searchUsersMovies() {
     this.onSearchUsersMovies.emit();

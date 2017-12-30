@@ -4,7 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { environment } from '../../environments/environment';
 //Components
 import { SearchBoxComponent } from './search-box/search-box.component';
+import { SearchButtonComponent } from './search-button/search-button.component';
 import { CardComponent } from './card/card.component';
+import { ModalComponent } from './modal/modal.component';
 //PIPES
 import { FilterListPipe } from '../pipes/FilterList';
 
@@ -12,7 +14,9 @@ import { FilterListPipe } from '../pipes/FilterList';
 @NgModule({
   declarations: [
     SearchBoxComponent,
+    SearchButtonComponent,
     CardComponent,
+    ModalComponent,
     FilterListPipe
   ],
   imports: [
@@ -21,12 +25,12 @@ import { FilterListPipe } from '../pipes/FilterList';
   ],
   exports: [
     SearchBoxComponent,
+    SearchButtonComponent,
     CardComponent,
+    ModalComponent,
     FilterListPipe,
     CommonModule,
-    FormsModule
-
-    
+    FormsModule 
   ]
 })
 export class SharedModule {}

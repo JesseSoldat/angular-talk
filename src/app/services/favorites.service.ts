@@ -7,8 +7,9 @@ import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angular
 
 @Injectable()
 export class FavoritesService {
-  movie: AngularFireList<Movie[]>;
+  movie;
   movies;
+  otherUsersList: AngularFireList<Movie[]>;
 
   constructor(private authService: AuthService,
               private afDb: AngularFireDatabase) {}
@@ -23,7 +24,6 @@ export class FavoritesService {
     });
   }
 
-  
   addToFavorites(m: Movie) {   
     const movie: Movie = this.createMovie(m);
     const uid = this.authService.getUid();
@@ -39,6 +39,13 @@ export class FavoritesService {
     const ref = `moviedb/users/${uid}/movies`;
     this.movies = this.afDb.list(ref) as AngularFireList<Movie[]>;
     this.movies.remove(key);
+  }
+
+  getOtherUsersLists() {
+    this.otherUsersList = this.afDb.list(`moviedb/users`) as AngularFireList<any>;
+    return this.otherUsersList.snapshotChanges().map(actions => {
+      return actions.map(action => ({ key: action.key, ...action.payload.val() }));
+    });;
   }
 
   createMovie(m) {

@@ -1,13 +1,16 @@
 <div class="row" [ngClass]="parent">
   <div class="col-xs-12">
     <form>
-      <div class="form-group-inline col-xs-12 col-sm-6">
+      <div class="form-group-inline col-xs-9 col-sm-6">
         <input type="text" 
           class="form-control"
            [placeholder]="placeholder"
            [(ngModel)]="searchStr" 
            name="searchStr"
            (ngModelChange)="onChange()">
+      </div>
+      <div class="col-xs-3 col-sm-6">
+          <ng-content></ng-content>
       </div>
     </form>
   </div>
