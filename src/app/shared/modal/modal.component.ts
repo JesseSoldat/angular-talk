@@ -15,6 +15,7 @@ export class ModalComponent implements OnInit, OnChanges {
   uid: string;
 
   myMovieIds = [];
+  othersMovieIds = [];
 
   constructor(private favoritesService: FavoritesService,
               private authService: AuthService) {}
@@ -46,21 +47,46 @@ export class ModalComponent implements OnInit, OnChanges {
     
     this.favoritesService.getOtherUsersLists().subscribe(usersList => {
       console.log(usersList);
-      this.getMyMovieIds(usersList);
+      usersList.forEach(user => {
+        this.getMyMovieIds(user);
+        this.getOthersMovieIds(user);
+      });
+      console.log(this.myMovieIds);
+      console.log(this.othersMovieIds);
+      this.createUserMatchedObject();
     });
   }
 
-  getMyMovieIds(usersList) {
-    usersList.forEach(user => {
-      if(this.uid === user.key) {
-        for(let key in user.movies) {
-          if(user.movies.hasOwnProperty(key)) {
-            this.myMovieIds.push(user.movies[key].id);
-          }
+  getMyMovieIds(user) {
+    if(this.uid === user.key) {
+      for(let key in user.movies) {
+        if(user.movies.hasOwnProperty(key)) {
+          this.myMovieIds.push(user.movies[key].id);
         }
       }
+    }
+  }
+
+  getOthersMovieIds(user) {
+    if(this.uid !== user.key) {
+      let tempArray = [user.name, user.key];
+      for(let key in user.movies) {
+        tempArray.push(user.movies[key].id);
+      }
+      this.othersMovieIds.push(tempArray);
+    }
+  }
+
+  createUserMatchedObject() {
+    this.othersMovieIds.forEach(userArray => {
+      let matchObj = {
+        name: '',
+        uid: '',
+        isMatch: [],
+        noMatch: [],
+        length: 0
+      };
     });
-    console.log(this.myMovieIds);
   }
 
   compareLengths(b, a) {

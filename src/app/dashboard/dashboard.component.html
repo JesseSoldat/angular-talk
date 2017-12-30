@@ -1,12 +1,16 @@
 <div class="container">
   <h1 style="margin-bottom:25px">Dashboard</h1>
   <div class="row">
+
     <div class="col-md-4 col-sm-6 col-xs-12">
       <div class="panel panel-primary">
         <div class="panel-heading">
           <h3 class="panel-title">Search for Movies</h3>
         </div>
-        <div class="panel-body">
+        <div class="panel-body"
+           [@hoverPanel]="hoverPanelState1" 
+           (mouseover)="updateHover('1', 'hover')" 
+           (mouseout)="updateHover('1', 'default')">
           <p>Search the ____ api for movies to add to your favorites collection.</p>
           <button class="btn btn-primary"
             (click)="onNavigate('search')"
@@ -22,7 +26,10 @@
         <div class="panel-heading">
           <h3 class="panel-title">View Your Favorites</h3>
         </div>
-        <div class="panel-body">
+        <div class="panel-body"
+           [@hoverPanel]="hoverPanelState2" 
+           (mouseover)="updateHover('2', 'hover')" 
+           (mouseout)="updateHover('2', 'default')">
           <p>Look through your list of favorites movies to help you decide what to watch tonight.</p>
           <button class="btn btn-primary"
              (click)="onNavigate('favorites')">
@@ -37,11 +44,14 @@
         <div class="panel-heading">
           <h3 class="panel-title">Search other Users Favorites</h3>
         </div>
-        <div class="panel-body">
+        <div class="panel-body"
+         [@hoverPanel]="hoverPanelState3" 
+         (mouseover)="updateHover('3', 'hover')" 
+         (mouseout)="updateHover('3', 'default')"
+        >
           <p>See what other users like to help you build a more diverse list of movies.</p>
           <button class="btn btn-primary"
-             (click)="onNavigate('')"
-          >
+             (click)="onNavigate('')">
             Others Favorites
           </button>
         </div>
