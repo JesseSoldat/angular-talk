@@ -13,6 +13,9 @@ export class FavoritesComponent implements OnInit {
   spinner = true;
   heart = true;
 
+  //PIPES
+  filterListBy: string;
+
   constructor(private favoritesService: FavoritesService) {}
 
   ngOnInit() {
@@ -20,15 +23,17 @@ export class FavoritesComponent implements OnInit {
     this.favoritesService.getFavorites().subscribe(data => {
       this.spinner = false;
       this.favorites = data.reverse();
-      console.log(this.favorites);
     }); 
   }
 
   onDeleteFromFavorites(movie) {
     let key = movie.key;
-    console.log(key);
     this.favoritesService.deleteFromFavorites(key);
     
+  }
+
+  onFilterText(text) {
+    this.filterListBy = text;
   }
 
 }

@@ -1,18 +1,15 @@
-
-<div class="col-sm-6 col-xs-12">
-  <div class="input-group">
-    <input type="text" 
-      class="form-control" 
-      [placeholder]="placeholder"
-      [(ngModel)]="searchStr"
-      (ngModelChange)="onChange()"
-
-    >
-    <span class="input-group-btn">
-      <button *ngIf="showButton" class="btn btn-primary" type="button">
-        {{buttonText}}
-      </button>
-    </span>
+<div class="row" [ngClass]="parent">
+  <div class="col-xs-12">
+    <form>
+      <div class="form-group-inline col-xs-12 col-sm-6">
+        <input type="text" 
+          class="form-control"
+           [placeholder]="placeholder"
+           [(ngModel)]="searchStr" 
+           name="searchStr"
+           (ngModelChange)="onChange()">
+      </div>
+    </form>
   </div>
 </div>
 

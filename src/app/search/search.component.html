@@ -3,8 +3,8 @@
     <div class="col-xs-12">
       <h3 id="title">Search for Movies to add to your Favorites.</h3>
       <app-search-box 
-        placeholder="Search the database..." buttonText="Search" 
-        [showButton]="true"
+        parent="search"
+        placeholder="Search the database..." 
         (onSearchDatabase)="searchDatabase($event)">
       </app-search-box>
     </div>
