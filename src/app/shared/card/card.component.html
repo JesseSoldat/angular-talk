@@ -19,14 +19,16 @@
         class="btn btn-secondary pull-right"
         (click)="addToFavorites(movie.id)"
          [disabled]="disabled">
-        <i class="fa fa-heart redHeart"></i>
+         <span class="paddingRight">Favorite</span>
+        <i class="fa fa-heart fa-1.5x redHeart"></i>
       </button>
 
       <button *ngIf="heart"
         class="btn btn-secondary pull-right"
         (click)="deleteFromFavorites(movie)"
         [disabled]="disabled">
-        <i  class="fa fa-trash blackTrash"></i>
+        <span class="paddingRight">Delete</span>
+        <i  class="fa fa-trash fa-1.5x blackTrash"></i>
       </button>
 
       <button class="btn btn-primary pull-right"
