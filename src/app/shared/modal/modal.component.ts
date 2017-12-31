@@ -28,7 +28,6 @@ export class ModalComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     jQuery('#myModal').on('hide.bs.modal', () => {
-      console.log('hide the modal event');
       this.onHideModal.emit();
       // this.closeModal();
     });
@@ -107,7 +106,6 @@ export class ModalComponent implements OnInit, OnChanges {
       this.matchedUserList.push(matchedObj);
     });
     this.matchedUserList.sort(this.sortByMostMatches);
-    console.log(this.matchedUserList);
   }
 
   sortByMostMatches(b, a) {

@@ -22,7 +22,14 @@ export class DataStoreService {
   private scrollPosition = new BehaviorSubject([0, 0]);
   public readonly scrollPosition$: Observable<number[]> = this.scrollPosition.asObservable();
 
-  changeNavFrom(route: string) {
+  public matchedUid: string;
+  public matchedName: string;
+
+  changeNavFrom(route: string, uid?: string, name?: string) {
+    if (uid && name) {
+      this.matchedUid = uid;
+      this.matchedName = name;
+    }
     this.navFrom.next(route);
   }
 
@@ -44,6 +51,7 @@ export class DataStoreService {
   }
 
   changeUnMatchedMovieIds(unMatchedIds: number[]) {
+    
     let copiedUnMatchedIds = unMatchedIds.slice();
     this.unMatchedMovieIds.next(copiedUnMatchedIds);
   }

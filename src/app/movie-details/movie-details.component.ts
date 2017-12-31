@@ -39,6 +39,12 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
 
   onNavigate(route) {
     this.dataStoreService.changeNavFrom('details');
+    if(route === 'matched-user') {
+      let uid = this.dataStoreService.matchedUid;
+      let name = this.dataStoreService.matchedName;
+      this.router.navigate([route, name, uid]);
+      return;
+    }
     this.router.navigate([route]);
   }
 

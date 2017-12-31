@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { DataStoreService } from '../services/data-store.service';
 import { FavoritesService } from '../services/favorites.service';
+import { SearchService } from '../services/search.service';
 import { Subscription } from 'rxjs/Subscription';
 import Movie from '../models/movie';
 import { getScroll } from '../shared/helper-functions';
@@ -26,7 +27,8 @@ export class MatchedUserComponent implements OnInit, OnDestroy {
               private route: ActivatedRoute,
               private authService: AuthService,
               private dataStoreService: DataStoreService,
-              private favoritesService: FavoritesService) { }
+              private favoritesService: FavoritesService,
+              private searchService: SearchService) { }
 
   ngOnInit() { 
     this.route.params.subscribe(params => {
@@ -57,15 +59,27 @@ export class MatchedUserComponent implements OnInit, OnDestroy {
     this.router.navigate([route]);
   }
 
-  onAddToFavorites(event) {
+  onAddToFavorites(id) {
+    //get the detailed movie object first to save to firebase
+    this.searchService.searchMovie(id).subscribe(movie => {
+      this.favoritesService.addToFavorites(movie).then(key => {
+        //TODO remove from list after adding to favorites
 
+
+
+
+        // this.currentSearchResults = this.compareSearchedWithFavorites(this.currentSearchResults);
+        // this.dataStoreService.changeCurrentSearch(this.currentSearchResults);
+        // console.log(key);
+      });
+    });
   }
 
   getMovieDetails(movie) {
     let position = getScroll(); //returns [x, y]
     this.dataStoreService.changeCurrentMovie(movie);
     this.dataStoreService.changeScrollPosition(position);
-    this.dataStoreService.changeNavFrom('search');
+    this.dataStoreService.changeNavFrom('matched-user', this.matchedUid, this.matchedName);
     this.router.navigate(['/movie-details', { id: movie.id }]);
     // matched - user / Joe / yKma5vvXjkW8O7bC1QFSfNxghIH3
   }
