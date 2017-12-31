@@ -20,5 +20,6 @@ export const hoverPanelTrigger = trigger('hoverPanel', [
     backgroundColor: '#ccffef',
     color: 'black'
   })),
-  transition('default <=> hover', animate('500ms ease-in'))
+  transition('default <=> hover', animate('300ms ease-in'))
 ]);
+

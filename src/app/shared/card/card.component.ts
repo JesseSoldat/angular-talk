@@ -1,11 +1,13 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataStoreService } from '../../services/data-store.service';
+import { hoverImageTrigger } from './card.animation';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss']
+  styleUrls: ['./card.component.scss'],
+  animations: [ hoverImageTrigger ]
 })
 export class CardComponent {
   @Input() movie;
@@ -13,11 +15,15 @@ export class CardComponent {
   @Output() onAddToFavorites = new EventEmitter();
   @Output() onDeleteFromFavorites = new EventEmitter();
   disabled = false;
+  hoverImage = 'default';
   
 
   constructor(private router: Router,
               private dataStoreService: DataStoreService) {}
-
+              
+  updateHoverImage(type) {
+    this.hoverImage = type;
+  }
 
   movieDetails(movie) {
     this.dataStoreService.changeCurrentMovie(movie);

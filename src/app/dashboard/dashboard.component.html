@@ -9,8 +9,8 @@
         </div>
         <div class="panel-body"
            [@hoverPanel]="hoverPanelState1" 
-           (mouseover)="updateHover('1', 'hover')" 
-           (mouseout)="updateHover('1', 'default')">
+           (mouseenter)="updateHover('1', 'hover')" 
+           (mouseleave)="updateHover('1', 'default')">
           <p>Search the ____ api for movies to add to your favorites collection.</p>
           <button class="btn btn-primary"
             (click)="onNavigate('search')"
@@ -28,8 +28,8 @@
         </div>
         <div class="panel-body"
            [@hoverPanel]="hoverPanelState2" 
-           (mouseover)="updateHover('2', 'hover')" 
-           (mouseout)="updateHover('2', 'default')">
+           (mouseenter)="updateHover('2', 'hover')" 
+           (mouseleave)="updateHover('2', 'default')">
           <p>Look through your list of favorites movies to help you decide what to watch tonight.</p>
           <button class="btn btn-primary"
              (click)="onNavigate('favorites')">
@@ -46,8 +46,8 @@
         </div>
         <div class="panel-body"
          [@hoverPanel]="hoverPanelState3" 
-         (mouseover)="updateHover('3', 'hover')" 
-         (mouseout)="updateHover('3', 'default')"
+         (mouseenter)="updateHover('3', 'hover')" 
+         (mouseleave)="updateHover('3', 'default')"
         >
           <p>See what other users like to help you build a more diverse list of movies.</p>
           <button class="btn btn-primary"

@@ -4,6 +4,10 @@
   </h4>
   <img 
     *ngIf="movie && movie.poster_path"
+    
+     [@hoverImage]="hoverImage"
+     (mouseover)="updateHoverImage('hover')"
+     (mouseout)="updateHoverImage('default')"     
     src="http://image.tmdb.org/t/p/w500/{{movie.poster_path}}" 
     alt="" 
     class="thumbnail movieImage"
