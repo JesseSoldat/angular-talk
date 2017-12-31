@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FavoritesService } from '../services/favorites.service';
 import { DataStoreService } from '../services/data-store.service';
 import { Observable } from 'rxjs/Observable';
 import Movie from '../models/movie';
-import { modalFunction } from '../shared/helper-functions';
+import { getScroll } from '../shared/helper-functions';
 
 @Component({
   selector: 'app-favorites',
@@ -21,17 +22,23 @@ export class FavoritesComponent implements OnInit {
   //PIPES
   filterListBy: string;
 
-  constructor(private favoritesService: FavoritesService,
+  constructor(private router: Router,
+              private favoritesService: FavoritesService,
               private dataStoreService: DataStoreService) {}
 
   ngOnInit() {
-    // modalFunction();
-    this.dataStoreService.updateNavFrom('favorites');
-
     this.favoritesService.getFavorites().subscribe(data => {
       this.spinner = false;
       this.favorites = data.reverse();
     }); 
+  }
+
+  getMovieDetails(movie) {
+    let position = getScroll(); //returns [x, y]
+    this.dataStoreService.changeCurrentMovie(movie);
+    this.dataStoreService.changeScrollPosition(position);
+    this.dataStoreService.changeNavFrom('favorites');
+    this.router.navigate(['/movie-details', { id: movie.id }]);
   }
 
   onDeleteFromFavorites(movie) {

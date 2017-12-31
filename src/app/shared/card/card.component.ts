@@ -14,6 +14,7 @@ export class CardComponent {
   @Input() heart;
   @Output() onAddToFavorites = new EventEmitter();
   @Output() onDeleteFromFavorites = new EventEmitter();
+  @Output() onGetMovieDetails = new EventEmitter();
   disabled = false;
   hoverImage = 'default';
   
@@ -26,8 +27,7 @@ export class CardComponent {
   }
 
   movieDetails(movie) {
-    this.dataStoreService.changeCurrentMovie(movie);
-    this.router.navigate(['movie-details', { id: movie.id }]);
+    this.onGetMovieDetails.emit(movie);
   }
 
   addToFavorites(id) {

@@ -5,16 +5,20 @@ import Movie from '../models/movie';
 
 @Injectable()
 export class DataStoreService {
+
   private currentMovie = new BehaviorSubject(null);
   public readonly currentMovie$: Observable<string> = this.currentMovie.asObservable();
-
-  private navFrom = new BehaviorSubject('');
-  public readonly navFrom$: Observable<string> = this.navFrom.asObservable();
 
   private currentSearchResults = new BehaviorSubject(null);
   public readonly currentSearchResults$: Observable<Movie[]> = this.currentSearchResults;
 
-  updateNavFrom(route) {
+  private navFrom = new BehaviorSubject('');
+  public readonly navFrom$: Observable<string> = this.navFrom.asObservable();
+
+  private scrollPosition = new BehaviorSubject([0, 0]);
+  public readonly scrollPosition$: Observable<number[]> = this.scrollPosition.asObservable();
+
+  changeNavFrom(route) {
     this.navFrom.next(route);
   }
 
@@ -26,6 +30,10 @@ export class DataStoreService {
   changeCurrentMovie(movie) {
     localStorage.setItem('currentMovie', JSON.stringify(movie));
     this.currentMovie.next(movie);
+  }
+
+  changeScrollPosition(position) {
+    this.scrollPosition.next(position);
   }
 
 }

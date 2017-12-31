@@ -5,6 +5,8 @@ import { DataStoreService } from '../services/data-store.service';
 import Movie from '../models/movie';
 import {differenceBy } from 'lodash';
 import { Subscription } from 'rxjs/Subscription';
+import { getScroll } from '../shared/helper-functions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -18,12 +20,13 @@ export class SearchComponent implements OnInit, OnDestroy {
   favorites: Movie[];
   heart = false;
 
-  constructor(private searchService: SearchService,
+  constructor(private router: Router,
+              private searchService: SearchService,
               private favoritesService: FavoritesService,
               private dataStoreService: DataStoreService) {}
 
   ngOnInit() {
-    this.dataStoreService.updateNavFrom('search');
+    
     //get the user's favorites in advance to compare with any new search results 
     this.favoritesService.getFavorites().subscribe(favorites => {
       this.favorites = favorites;
@@ -50,6 +53,14 @@ export class SearchComponent implements OnInit, OnDestroy {
       let results = this.compareSearchedWithFavorites(response.results);
       this.dataStoreService.changeCurrentSearch(results);
     });
+  }
+
+  getMovieDetails(movie) {
+    let position = getScroll(); //returns [x, y]
+    this.dataStoreService.changeCurrentMovie(movie);
+    this.dataStoreService.changeScrollPosition(position);
+    this.dataStoreService.changeNavFrom('search');
+    this.router.navigate(['/movie-details', { id: movie.id }]);
   }
 
   onAddToFavorites(id: string) {

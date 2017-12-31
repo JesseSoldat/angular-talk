@@ -38,6 +38,7 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
   }
 
   onNavigate(route) {
+    this.dataStoreService.changeNavFrom('details');
     this.router.navigate([route]);
   }
 

@@ -5,7 +5,8 @@
       <app-search-box 
         parent="search"
         placeholder="Search the database..." 
-        (onSearchDatabase)="searchDatabase($event)">
+        (onSearchDatabase)="searchDatabase($event)"
+      >
       </app-search-box>
     </div>
   </div>
@@ -17,6 +18,7 @@
         [movie]="movie"
         [heart]="heart"
         (onAddToFavorites)="onAddToFavorites($event)"
+        (onGetMovieDetails)="getMovieDetails($event)"
       >
       </app-card>
     </div>

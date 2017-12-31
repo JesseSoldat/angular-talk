@@ -51,7 +51,8 @@
     <app-card 
       [movie]="movie"
       [heart]="heart"
-      (onDeleteFromFavorites)="onDeleteFromFavorites($event)">
+      (onDeleteFromFavorites)="onDeleteFromFavorites($event)"
+      (onGetMovieDetails)="getMovieDetails($event)">
     </app-card>
   </div>
 </div>
