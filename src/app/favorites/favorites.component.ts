@@ -1,17 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FavoritesService } from '../services/favorites.service';
 import { DataStoreService } from '../services/data-store.service';
 import { Observable } from 'rxjs/Observable';
 import Movie from '../models/movie';
 import { getScroll } from '../shared/helper-functions';
+import { Subscription } from 'rxjs/Subscription';
+import { cloneDeep } from 'lodash';
 
 @Component({
   selector: 'app-favorites',
   templateUrl: './favorites.component.html',
   styleUrls: ['./favorites.component.scss']
 })
-export class FavoritesComponent implements OnInit {
+export class FavoritesComponent implements OnInit, OnDestroy {
+  favoritesSubscription: Subscription;
   favorites: Movie[];
   spinner = true;
   heart = true;
@@ -27,9 +30,10 @@ export class FavoritesComponent implements OnInit {
               private dataStoreService: DataStoreService) {}
 
   ngOnInit() {
-    this.favoritesService.getFavorites().subscribe(data => {
+    this.favoritesSubscription = this.favoritesService.getFavorites().subscribe(data => {
       this.spinner = false;
-      this.favorites = data.reverse();
+      // console.log('favorites component / getFavorites');
+      this.favorites = cloneDeep(data.reverse());
     }); 
   }
 
@@ -57,6 +61,10 @@ export class FavoritesComponent implements OnInit {
 
   onHideModal() {
     this.showModal = false;
+  }
+
+  ngOnDestroy() {
+    this.favoritesSubscription.unsubscribe();
   }
 
 }

@@ -1,7 +1,5 @@
-
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
+import { SharedModule } from '../shared/shared.module';
 import { MatchedUserComponent } from './matched-user.component';
 import { MatchedUserRoutingModule } from './matched-user-routing.module';
 
@@ -10,8 +8,8 @@ import { MatchedUserRoutingModule } from './matched-user-routing.module';
     MatchedUserComponent
   ],
   imports: [
-    CommonModule,
-    MatchedUserRoutingModule
+    MatchedUserRoutingModule,
+    SharedModule
   ]
 })
 export class MatchedUserModule { }

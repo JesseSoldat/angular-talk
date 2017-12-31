@@ -10,6 +10,7 @@ export class FavoritesService {
   movie: AngularFireList<Movie>;
   movies;
   otherUsersList: AngularFireList<Movie[]>;
+  otherUserList: AngularFireList<Movie[]>;
 
   constructor(private authService: AuthService,
               private afDb: AngularFireDatabase) {}
@@ -19,12 +20,13 @@ export class FavoritesService {
     const ref = `moviedb/users/${uid}/movies`;
     this.movies = this.afDb.list(ref) as AngularFireList<Movie[]>;
     // return this.movies.valueChanges();
+    //fired with addToFavorites / deleteFromFavorites
     return this.movies.snapshotChanges().map(actions => {
       return actions.map(action => ({ key: action.key, ...action.payload.val() }));
     });
   }
 
-  addToFavorites(m: Movie) {   
+  addToFavorites(m: Movie) { 
     const movie: Movie = this.createMovie(m);
     const uid = this.authService.getUid();
     const ref = `moviedb/users/${uid}/movies`;
@@ -42,8 +44,17 @@ export class FavoritesService {
   }
 
   getOtherUsersLists() {
-    this.otherUsersList = this.afDb.list(`moviedb/users`) as AngularFireList<any>;
+    const ref = `moviedb/users`;
+    this.otherUsersList = this.afDb.list(ref) as AngularFireList<Movie[]>;
     return this.otherUsersList.snapshotChanges().map(actions => {
+      return actions.map(action => ({ key: action.key, ...action.payload.val() }));
+    });;
+  }
+
+  getOtherUserList(uid) {
+    const ref = `moviedb/users/${uid}/movies`;
+    this.otherUserList = this.afDb.list(ref) as AngularFireList<Movie[]>;
+    return this.otherUserList.snapshotChanges().map(actions => {
       return actions.map(action => ({ key: action.key, ...action.payload.val() }));
     });;
   }

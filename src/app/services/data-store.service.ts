@@ -13,6 +13,9 @@ export class DataStoreService {
   private currentSearchResults = new BehaviorSubject(null);
   public readonly currentSearchResults$: Observable<Movie[]> = this.currentSearchResults;
 
+  private unMatchedMovieIds = new BehaviorSubject([]);
+  public readonly unMatchedMovieIds$: Observable<number[]> = this.unMatchedMovieIds.asObservable();
+
   private navFrom = new BehaviorSubject('');
   public readonly navFrom$: Observable<string> = this.navFrom.asObservable();
 
@@ -38,6 +41,11 @@ export class DataStoreService {
   changeScrollPosition(position: number[]) {
     let copiedPosition = position.slice();
     this.scrollPosition.next(copiedPosition);
+  }
+
+  changeUnMatchedMovieIds(unMatchedIds: number[]) {
+    let copiedUnMatchedIds = unMatchedIds.slice();
+    this.unMatchedMovieIds.next(copiedUnMatchedIds);
   }
 
 }

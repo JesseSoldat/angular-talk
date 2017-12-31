@@ -1,5 +1,7 @@
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { FavoritesService } from '../../services/favorites.service';
+import { DataStoreService } from '../../services/data-store.service';
 import { AuthService } from '../../services/auth.service';
 import { intersection, difference } from 'lodash';
 
@@ -20,7 +22,9 @@ export class ModalComponent implements OnInit, OnChanges {
   matchedUserList = [];
 
   constructor(private favoritesService: FavoritesService,
-              private authService: AuthService) {}
+              private authService: AuthService,
+              private dataStoreService: DataStoreService,
+              private router: Router) {}
 
   ngOnInit() {
     jQuery('#myModal').on('hide.bs.modal', () => {
@@ -42,6 +46,12 @@ export class ModalComponent implements OnInit, OnChanges {
 
   closeModal() {
   //   this.onHideModal.emit();
+  }
+
+  onNavigate(matched, e) {
+    e.preventDefault();
+    this.dataStoreService.changeUnMatchedMovieIds(matched.noMatch);
+    this.router.navigate(['../matched-user', matched.name, matched.uid]);
   }
 
   searchUsersList() {

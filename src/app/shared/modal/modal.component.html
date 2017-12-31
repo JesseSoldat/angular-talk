@@ -19,8 +19,8 @@
       <ul class="list-group">
         <li class="list-group-item"
           *ngFor="let matched of matchedUserList">
-          <a
-           [routerLink]="['../matched-user', matched.name, matched.uid]"
+          <a href="#"
+           (click)="onNavigate(matched, $event)"
            data-dismiss="modal">
             <h4>{{matched.name}}</h4>
           </a>
