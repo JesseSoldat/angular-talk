@@ -7,7 +7,7 @@ import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angular
 
 @Injectable()
 export class FavoritesService {
-  movie;
+  movie: AngularFireList<Movie>;
   movies;
   otherUsersList: AngularFireList<Movie[]>;
 

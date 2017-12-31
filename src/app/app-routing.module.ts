@@ -7,7 +7,8 @@ const routes: Routes = [
   { path: 'dashboard', loadChildren: 'app/dashboard/dashboard.module#DashboardModule' },
   { path: 'search', loadChildren: 'app/search/search.module#SearchModule' },
   { path: 'movie-details', loadChildren: 'app/movie-details/movie-details.module#MovieDetailsModule'},
-  { path: 'favorites', loadChildren: 'app/favorites/favorites.module#FavoritesModule'}
+  { path: 'favorites', loadChildren: 'app/favorites/favorites.module#FavoritesModule'},
+  { path: 'matched-user/:uid/:name', loadChildren: 'app/matched-user/matched-user.module#MatchedUserModule'}
 ];
 
 @NgModule({

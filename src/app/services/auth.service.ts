@@ -9,6 +9,7 @@ import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 export class AuthService implements OnInit {
   private message = new BehaviorSubject("");
   public readonly message$: Observable<string> = this.message.asObservable();
+  
   private uid = new BehaviorSubject(null);
   public readonly uid$: Observable<string> = this.uid.asObservable();
 

@@ -1,6 +1,7 @@
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { FavoritesService } from '../../services/favorites.service';
 import { AuthService } from '../../services/auth.service';
+import { intersection, difference } from 'lodash';
 
 declare let jQuery: any;
 
@@ -16,6 +17,7 @@ export class ModalComponent implements OnInit, OnChanges {
 
   myMovieIds = [];
   othersMovieIds = [];
+  matchedUserList = [];
 
   constructor(private favoritesService: FavoritesService,
               private authService: AuthService) {}
@@ -46,16 +48,13 @@ export class ModalComponent implements OnInit, OnChanges {
     this.uid = this.authService.getUid();
     
     this.favoritesService.getOtherUsersLists().subscribe(usersList => {
-      console.log(usersList);
       usersList.forEach(user => {
         this.getMyMovieIds(user);
         this.getOthersMovieIds(user);
       });
-      console.log(this.myMovieIds);
-      console.log(this.othersMovieIds);
       this.createUserMatchedObject();
     });
-  }
+  } 
 
   getMyMovieIds(user) {
     if(this.uid === user.key) {
@@ -78,18 +77,30 @@ export class ModalComponent implements OnInit, OnChanges {
   }
 
   createUserMatchedObject() {
-    this.othersMovieIds.forEach(userArray => {
-      let matchObj = {
+    this.othersMovieIds.forEach(othersArray => {
+      let matchedObj = {
         name: '',
         uid: '',
         isMatch: [],
         noMatch: [],
         length: 0
       };
+      matchedObj.name = othersArray.shift();
+      matchedObj.uid = othersArray.shift();
+
+      matchedObj.isMatch = intersection(othersArray, this.myMovieIds);
+
+      matchedObj.noMatch = difference(othersArray, this.myMovieIds);
+
+      matchedObj.length = matchedObj.isMatch.length;
+
+      this.matchedUserList.push(matchedObj);
     });
+    this.matchedUserList.sort(this.sortByMostMatches);
+    console.log(this.matchedUserList);
   }
 
-  compareLengths(b, a) {
+  sortByMostMatches(b, a) {
     if (a.length < b.length) {
       return -1;      
     }

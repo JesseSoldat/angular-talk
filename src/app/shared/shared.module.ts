@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { environment } from '../../environments/environment';
 //Components
 import { SearchBoxComponent } from './search-box/search-box.component';
@@ -21,7 +22,8 @@ import { FilterListPipe } from '../pipes/FilterList';
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ],
   exports: [
     SearchBoxComponent,
@@ -30,7 +32,8 @@ import { FilterListPipe } from '../pipes/FilterList';
     ModalComponent,
     FilterListPipe,
     CommonModule,
-    FormsModule 
+    FormsModule ,
+    RouterModule
   ]
 })
 export class SharedModule {}
