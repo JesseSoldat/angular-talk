@@ -23,6 +23,7 @@ export class SearchComponent implements OnInit, OnDestroy {
               private dataStoreService: DataStoreService) {}
 
   ngOnInit() {
+    this.dataStoreService.updateNavFrom('search');
     //get the user's favorites in advance to compare with any new search results 
     this.favoritesService.getFavorites().subscribe(favorites => {
       this.favorites = favorites;

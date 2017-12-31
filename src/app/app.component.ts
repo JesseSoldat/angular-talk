@@ -7,12 +7,20 @@ import { Router, NavigationEnd } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  navToDetails = false;
 
   constructor(private router: Router) {}
   
   ngOnInit() {
     this.router.events.filter(event => event instanceof NavigationEnd)
-      .subscribe(() => {
+      .subscribe((nav: any) => {
+        if (nav.url.includes('details')) {
+          this.navToDetails = true;
+        }
+        if(this.navToDetails) {
+          if (nav.url.includes('search'))
+          return;
+        }
         window.scrollTo(0, 0);
       });
   }

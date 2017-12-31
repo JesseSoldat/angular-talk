@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FavoritesService } from '../services/favorites.service';
+import { DataStoreService } from '../services/data-store.service';
 import { Observable } from 'rxjs/Observable';
 import Movie from '../models/movie';
 import { modalFunction } from '../shared/helper-functions';
@@ -20,10 +21,12 @@ export class FavoritesComponent implements OnInit {
   //PIPES
   filterListBy: string;
 
-  constructor(private favoritesService: FavoritesService) {}
+  constructor(private favoritesService: FavoritesService,
+              private dataStoreService: DataStoreService) {}
 
   ngOnInit() {
     // modalFunction();
+    this.dataStoreService.updateNavFrom('favorites');
 
     this.favoritesService.getFavorites().subscribe(data => {
       this.spinner = false;
