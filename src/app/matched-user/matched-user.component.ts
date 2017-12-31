@@ -63,14 +63,12 @@ export class MatchedUserComponent implements OnInit, OnDestroy {
     //get the detailed movie object first to save to firebase
     this.searchService.searchMovie(id).subscribe(movie => {
       this.favoritesService.addToFavorites(movie).then(key => {
-        //TODO remove from list after adding to favorites
 
+        this.unMatchedMovies = this.unMatchedMovies.filter(m => m.id !== movie.id);
 
+        this.unMatchedMovieIds = this.unMatchedMovieIds.filter(id=> id !== movie.id);
 
-
-        // this.currentSearchResults = this.compareSearchedWithFavorites(this.currentSearchResults);
-        // this.dataStoreService.changeCurrentSearch(this.currentSearchResults);
-        // console.log(key);
+        this.dataStoreService.changeUnMatchedMovieIds(this.unMatchedMovieIds);
       });
     });
   }
