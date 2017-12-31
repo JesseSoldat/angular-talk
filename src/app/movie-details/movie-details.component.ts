@@ -23,11 +23,11 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
 
     this.subscription = this.route.params
       .subscribe(params => {
-        // console.log(params);
         this.searchService.searchMovie(params.id)
           .subscribe(movie => {
             this.spinner = false;
             this.movie = movie;
+            console.log(this.movie)
           });
       });
 

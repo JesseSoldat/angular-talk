@@ -57,13 +57,35 @@
               {{movie.vote_average}}
             </li>
 
-            <!-- <li class="list-group-item"
+            <li class="list-group-item" 
+            *ngIf="movie.genres && movie.genres.length > 1">
+              <strong>Genres: </strong>
+              <br><br>
+              <div *ngFor="let genre of movie.genres"> 
+                {{genre.name}}
+              </div>
+            </li>
+
+            <li class="list-group-item" *ngIf="movie.production_companies && movie.production_companies.length === 1">
+              <strong>Production Company: </strong>
+              <br><br>
+              <div *ngFor="let company of movie.production_companies">
+                
+                {{company.name}}
+              </div>
+            </li>
+
+            <li class="list-group-item"
               *ngIf="movie.production_companies && movie.production_companies.length > 1">
               <strong>Production Companies: </strong>
+              <br><br>
               <div *ngFor="let company of movie.production_companies">
-                {{company}}
+                {{company.name}}
               </div>
-            </li> -->
+            </li>
+
+           
+
             <li class="list-group-item"
               *ngIf="movie.overview">
               <strong>Description: </strong><br>
@@ -81,6 +103,7 @@
             </li>
 
             <div>
+              <br><br>
               <button class="btn btn-primary"
                 (click)="onNavigate('search')">
                 Go Back
