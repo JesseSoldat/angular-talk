@@ -1,49 +1,43 @@
-<div class="modal fade"
-  id="myModal"
-  tabindex="-1"
-  role="dialog">
-  <div class="modal-content">
-
-    <div class="modal-header">
-      <button class="close"
-        type="button"
-        data-dismiss="modal">
-        <span>&times;</span>
-      </button>
-      <h4 class="modal-title">
-        Find Other Users Movies
-      </h4>
-    </div>
-
-    <div class="modal-body">
-      <ul class="list-group">
-        <li class="list-group-item"
-          *ngFor="let matched of matchedUserList">
-          <a href="#"
-           (click)="onNavigate(matched, $event)"
-           data-dismiss="modal">
-            <h4>{{matched.name}}</h4>
-          </a>
-          <hr>
-          <h4>
-            <strong>Matches: </strong>
-            {{matched.isMatch.length}}
+<div class="row">
+  <div class="col-xs-12 col-sm-6 col-sm-offset-4">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+      <div class="modal-content">
+    
+        <div class="modal-header">
+          <button class="close" type="button" data-dismiss="modal">
+            <span>&times;</span>
+          </button>
+          <h4 class="modal-title">
+            Find Other Users Movies
           </h4>
-          <h4>
-            <strong>Other Movies: </strong>
-            {{matched.noMatch.length}}
-          </h4>
-        </li>
-      </ul>
+        </div>
+    
+        <div class="modal-body">
+          <ul class="list-group">
+            <li class="list-group-item" *ngFor="let matched of matchedUserList">
+              <a href="#" (click)="onNavigate(matched, $event)" data-dismiss="modal">
+                <h4>{{matched.name}}</h4>
+              </a>
+              <hr>
+              <h4>
+                <strong>Matches: </strong>
+                {{matched.isMatch.length}}
+              </h4>
+              <h4>
+                <strong>Other Movies: </strong>
+                {{matched.noMatch.length}}
+              </h4>
+            </li>
+          </ul>
+        </div>
+    
+        <div class="modal-footer">
+          <button class="btn btn-danger" data-dismiss="modal" (click)="closeModal()">
+            Close
+          </button>
+        </div>
+    
+      </div>
     </div>
- 
-    <div class="modal-footer">
-      <button class="btn btn-danger"
-        data-dismiss="modal"
-        (click)="closeModal()">
-        Close
-      </button>
-    </div>
-
   </div>
 </div>

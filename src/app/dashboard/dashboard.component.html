@@ -51,12 +51,22 @@
         >
           <p>See what other users like to help you build a more diverse list of movies.</p>
           <button class="btn btn-primary"
-             (click)="onNavigate('')">
+             (click)="onSearchUsersMovies()">
             Others Favorites
           </button>
         </div>
       </div>
     </div>
   </div>
+
+
+  <app-modal 
+    [showModal]="showModal" 
+    (onHideModal)="onHideModal()">
+  </app-modal>
+
+
 </div>
+
+
 

@@ -12,6 +12,9 @@ export class DashboardComponent {
   hoverPanelState1 = 'default';
   hoverPanelState2 = 'default';
   hoverPanelState3 = 'default';
+
+  //Modal
+  showModal = false;
   
 
   constructor(private router: Router) {}
@@ -32,4 +35,12 @@ export class DashboardComponent {
         break;
     }
   }
+
+  onSearchUsersMovies() {
+    this.showModal = true;
+  }
+
+  onHideModal() {
+    this.showModal = false;
+  } 
 }

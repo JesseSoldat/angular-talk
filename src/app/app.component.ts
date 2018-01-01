@@ -25,16 +25,15 @@ export class AppComponent implements OnInit {
     });
     
     this.router.events.filter(event => event instanceof NavigationEnd)
-      .subscribe((navTo: any) => {
-        this.navTo = navTo.url;
-        console.log(this.navTo);
-                                  
+      .subscribe((obj: any) => {
+        this.navTo = obj.url;
+        // console.log(this.navTo);
+                         
         if (!(this.navTo.includes('favorites', 1) || this.navTo.includes('movie-details;', 1))) {
-          console.log('Wipe favorites state');
+          // console.log('Wipe favorites state');
           this.dataStoreService.changeCurrentFavorites(null);
         }
         
-
         if(this.navFrom === 'details') {
           setTimeout(() => {
             window.scrollTo({
@@ -46,9 +45,7 @@ export class AppComponent implements OnInit {
           this.dataStoreService.changeNavFrom('');
           return;
         }
-
-        window.scrollTo(0, 0);
-        
+        window.scrollTo(0, 0); 
       });
   }
 }

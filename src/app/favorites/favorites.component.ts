@@ -83,7 +83,7 @@ export class FavoritesComponent implements OnInit, OnDestroy {
 
   onHideModal() {
     this.showModal = false;
-  }
+  } 
 
   ngOnDestroy() {
     if(this.favoritesSubscription !== undefined) {
