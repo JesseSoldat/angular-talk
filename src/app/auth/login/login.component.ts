@@ -1,30 +1,22 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit, OnDestroy  {
-  message: string;
-  subscription: Subscription;
+export class LoginComponent implements OnInit {
+  message$: Observable<string>;
 
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    this.subscription = this.authService.message$.subscribe(msg => {
-      this.message = msg;
-    });
+    this.message$ = this.authService.message$;
   }
 
   formSubmitted({email, password}) {
     this.authService.emailLogin(email, password);
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
-  
+  } 
 }

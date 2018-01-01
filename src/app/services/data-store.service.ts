@@ -13,6 +13,9 @@ export class DataStoreService {
   private currentSearchResults = new BehaviorSubject(null);
   public readonly currentSearchResults$: Observable<Movie[]> = this.currentSearchResults;
 
+  private currentFavorites = new BehaviorSubject(null);
+  public readonly currentFavorites$: Observable<Movie[]> = this.currentFavorites.asObservable();
+
   private unMatchedMovieIds = new BehaviorSubject([]);
   public readonly unMatchedMovieIds$: Observable<number[]> = this.unMatchedMovieIds.asObservable();
 
@@ -45,13 +48,17 @@ export class DataStoreService {
     this.currentMovie.next(clonedMovie);
   }
 
+  changeCurrentFavorites(movies: Movie[]) {
+    let clonedMovies = cloneDeep(movies);
+    this.currentFavorites.next(clonedMovies);
+  }
+
   changeScrollPosition(position: number[]) {
     let copiedPosition = position.slice();
     this.scrollPosition.next(copiedPosition);
   }
 
-  changeUnMatchedMovieIds(unMatchedIds: number[]) {
-    
+  changeUnMatchedMovieIds(unMatchedIds: number[]) { 
     let copiedUnMatchedIds = unMatchedIds.slice();
     this.unMatchedMovieIds.next(copiedUnMatchedIds);
   }

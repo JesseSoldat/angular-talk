@@ -13,11 +13,11 @@ import { Router } from '@angular/router';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-
 export class SearchComponent implements OnInit, OnDestroy {
   currentSearchResults: Movie[] = [];
-  subscription: Subscription;
+  searchResultsSubscription: Subscription;
   favorites: Movie[];
+  favoritesSubscription: Subscription;
   heart = false;
 
   constructor(private router: Router,
@@ -26,14 +26,13 @@ export class SearchComponent implements OnInit, OnDestroy {
               private dataStoreService: DataStoreService) {}
 
   ngOnInit() {
-    
     //get the user's favorites in advance to compare with any new search results 
-    this.favoritesService.getFavorites().subscribe(favorites => {
+    this.favoritesSubscription = this.favoritesService.getFavorites().subscribe(favorites => {
       this.favorites = favorites;
     });
 
     //get the results from the service first and fall back to localStorage
-    this.subscription = this.dataStoreService.currentSearchResults$
+    this.searchResultsSubscription = this.dataStoreService.currentSearchResults$
       .subscribe(results => {
         if(results === null) {
           this.currentSearchResults = JSON.parse(localStorage.getItem('currentSearchResults'));
@@ -46,7 +45,6 @@ export class SearchComponent implements OnInit, OnDestroy {
         }
     }); 
   }
-
 
   searchDatabase(searchText: string) {
     this.searchService.searchMovies(searchText).subscribe(response => {
@@ -79,6 +77,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.searchResultsSubscription.unsubscribe();
+    this.favoritesSubscription.unsubscribe();
   }
 }

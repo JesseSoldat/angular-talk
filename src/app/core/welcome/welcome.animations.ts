@@ -15,3 +15,4 @@ export const enterImageTrigger = trigger('enterImage', [
   })),
   transition('* => default', animate('900ms ease-in')),
 ]);
+

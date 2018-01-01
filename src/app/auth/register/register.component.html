@@ -1,6 +1,6 @@
 <app-auth-form
   formType="Register"
-  [message]="message"
+  [message]="message$ | async"
   (formSubmitted)="formSubmitted($event)"
 
 >

@@ -9,6 +9,7 @@ import { DataStoreService } from './services/data-store.service';
 })
 export class AppComponent implements OnInit {
   navFrom: string;
+  navTo: string;
   scrollPosition = [0, 0];
 
   constructor(private router: Router,
@@ -18,11 +19,21 @@ export class AppComponent implements OnInit {
     this.dataStoreService.navFrom$.subscribe(navFrom => {
       this.navFrom = navFrom;
     });
+
     this.dataStoreService.scrollPosition$.subscribe(scrollPosition => {
       this.scrollPosition = scrollPosition;
     });
+    
     this.router.events.filter(event => event instanceof NavigationEnd)
       .subscribe((navTo: any) => {
+        this.navTo = navTo.url;
+        console.log(this.navTo);
+                                  
+        if (!(this.navTo.includes('favorites', 1) || this.navTo.includes('movie-details;', 1))) {
+          console.log('Wipe favorites state');
+          this.dataStoreService.changeCurrentFavorites(null);
+        }
+        
 
         if(this.navFrom === 'details') {
           setTimeout(() => {

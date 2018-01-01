@@ -15,9 +15,11 @@ import { cloneDeep } from 'lodash';
 })
 export class FavoritesComponent implements OnInit, OnDestroy {
   favoritesSubscription: Subscription;
+  currentFavoritesSubscription: Subscription;
   favorites: Movie[];
   spinner = true;
   heart = true;
+  favoritesCached = false;
 
   //Modal
   showModal = false;
@@ -29,10 +31,23 @@ export class FavoritesComponent implements OnInit, OnDestroy {
               private favoritesService: FavoritesService,
               private dataStoreService: DataStoreService) {}
 
-  ngOnInit() {
+  ngOnInit() { 
+    this.currentFavoritesSubscription = this.dataStoreService.currentFavorites$.subscribe(currentFavorites => {
+      if(currentFavorites === null) {
+        this.favoritesCached = false;
+        this.getFavoritesFromApi();
+        return;
+      }
+      this.spinner = false;
+      this.favoritesCached = true;
+      this.favorites = currentFavorites;
+    });   
+  }
+
+  getFavoritesFromApi() {
     this.favoritesSubscription = this.favoritesService.getFavorites().subscribe(data => {
       this.spinner = false;
-      // console.log('favorites component / getFavorites');
+      console.log('getFavorites from API');
       this.favorites = cloneDeep(data.reverse());
     }); 
   }
@@ -40,15 +55,22 @@ export class FavoritesComponent implements OnInit, OnDestroy {
   getMovieDetails(movie) {
     let position = getScroll(); //returns [x, y]
     this.dataStoreService.changeCurrentMovie(movie);
+    this.favoritesCached = true;
+    this.dataStoreService.changeCurrentFavorites(this.favorites);
     this.dataStoreService.changeScrollPosition(position);
     this.dataStoreService.changeNavFrom('favorites');
     this.router.navigate(['/movie-details', { id: movie.id }]);
   }
 
   onDeleteFromFavorites(movie) {
+    //Delete from TEMP CACHED ARRAY
+    if(this.favoritesCached) {
+      let index = this.favorites.findIndex(m => m.id === movie.id);
+      this.favorites.splice(index, 1);
+    }
+    //DELETE from the API
     let key = movie.key;
-    this.favoritesService.deleteFromFavorites(key);
-    
+    this.favoritesService.deleteFromFavorites(key);  
   }
 
   onFilterText(text) {
@@ -64,7 +86,13 @@ export class FavoritesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.favoritesSubscription.unsubscribe();
+    if(this.favoritesSubscription !== undefined) {
+      this.favoritesSubscription.unsubscribe();      
+    }
+    if(this.currentFavoritesSubscription !== undefined) {
+      this.currentFavoritesSubscription.unsubscribe();
+    }
+    
   }
 
 }
