@@ -1,9 +1,5 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
-
-interface User {
-  email: string;
-  password: string;
-}
+import User from '../../models/user';
 
 @Component({
   selector: 'app-auth-form',
@@ -12,7 +8,6 @@ interface User {
 }) 
 export class AuthFormComponent {
   @Input() formType: string;
-  @Input() message: string;
   @Output() formSubmitted = new EventEmitter<User>();
 
   onSubmit(form) {

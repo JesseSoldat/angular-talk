@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subscription } from 'rxjs/Subscription';
+import { DataStoreService } from '../../services/data-store.service';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +15,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
   constructor(private router: Router,
-              private authService: AuthService) {}
+              private authService: AuthService,
+              private dataStoreService: DataStoreService) {}
 
   ngOnInit() {
     this.authService.getUser();
@@ -29,7 +31,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   onNavigate(e, route) {
     e.preventDefault();
-    this.authService.clearMessage();
+    this.dataStoreService.clearAlert();
     this.router.navigate([route]);
   }
 

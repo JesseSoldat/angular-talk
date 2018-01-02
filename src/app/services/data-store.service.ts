@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import Movie from '../models/movie';
+import Alert from '../models/alert';
 import { cloneDeep } from 'lodash';
 
 @Injectable()
@@ -18,6 +19,9 @@ export class DataStoreService {
 
   private unMatchedMovieIds = new BehaviorSubject([]);
   public readonly unMatchedMovieIds$: Observable<number[]> = this.unMatchedMovieIds.asObservable();
+
+  private alert = new BehaviorSubject(null);
+  public readonly alert$: Observable<Alert> = this.alert.asObservable();
 
   private navFrom = new BehaviorSubject('');
   public readonly navFrom$: Observable<string> = this.navFrom.asObservable();
@@ -53,14 +57,24 @@ export class DataStoreService {
     this.currentFavorites.next(clonedMovies);
   }
 
+  changeUnMatchedMovieIds(unMatchedIds: number[]) {
+    let copiedUnMatchedIds = unMatchedIds.slice();
+    this.unMatchedMovieIds.next(copiedUnMatchedIds);
+  }
+
+  changeAlert(alert: Alert) {
+    this.alert.next(alert);
+  }
+
+  clearAlert() {
+    this.alert.next(null);
+  }
+
   changeScrollPosition(position: number[]) {
     let copiedPosition = position.slice();
     this.scrollPosition.next(copiedPosition);
   }
 
-  changeUnMatchedMovieIds(unMatchedIds: number[]) { 
-    let copiedUnMatchedIds = unMatchedIds.slice();
-    this.unMatchedMovieIds.next(copiedUnMatchedIds);
-  }
+  
 
 }

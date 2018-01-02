@@ -5,7 +5,6 @@ import { HttpModule, JsonpModule } from '@angular/http';
 import { environment } from '../../environments/environment';
 // import '../../shared/rxjs-extensions';
 
-
 //Modules
 import { SharedModule } from '../shared/shared.module';
 //Services
@@ -16,6 +15,7 @@ import { FavoritesService } from '../services/favorites.service';
 //Components
 import { HeaderComponent } from './header/header.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { MessageComponent } from './message/message.component';
 
 //Third Party
 import { AngularFireModule } from 'angularfire2';
@@ -23,11 +23,11 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 
-
 @NgModule({
   declarations: [
     HeaderComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    MessageComponent
   ],
   imports: [
     RouterModule,
@@ -41,6 +41,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
   ],
   exports: [
     HeaderComponent,
+    MessageComponent,
     BrowserAnimationsModule
   ],
   providers: [
