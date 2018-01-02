@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { DataStoreService } from '../../services/data-store.service';
 import Alert from '../../models/alert';
@@ -11,23 +11,13 @@ import { capitalize } from '../../shared/helper-functions';
   templateUrl: './message.component.html',
   styleUrls: ['./message.component.scss']
 })
-export class MessageComponent implements OnInit, OnDestroy {
-  alert: Alert;
-  alertSubscription: Subscription;
+export class MessageComponent implements OnInit {
+  alert$: Observable<Alert>;
 
   constructor(private dataStoreService: DataStoreService) { }
 
   ngOnInit() {
-    this.alertSubscription = this.dataStoreService.alert$.subscribe(alert => {
-      this.alert = alert;
-    });
-
-   
-    this.dataStoreService.changeAlert({
-      message: 'Test',
-      style: alertMessages.success,
-      type: 'success', 
-    });
+    this.alert$ = this.dataStoreService.alert$;
   }
 
   closeAlert() {
@@ -36,10 +26,6 @@ export class MessageComponent implements OnInit, OnDestroy {
 
   capitalize(string) {
     return capitalize(string);
-  }
-
-  ngOnDestroy() {
-    this.alertSubscription.unsubscribe();
   }
 
 }

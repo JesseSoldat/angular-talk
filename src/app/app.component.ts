@@ -27,7 +27,6 @@ export class AppComponent implements OnInit {
     this.router.events.filter(event => event instanceof NavigationEnd)
       .subscribe((obj: any) => {
         
-
         this.navTo = obj.url;
         // console.log(this.navTo);
                          

@@ -1,5 +1,5 @@
 <div id="alertContainer">
-  <div *ngIf="alert" [class]="alert.style" class="fade in alert-dismissible" role="alert">
+  <div *ngIf="alert$ | async as alert" [class]="alert.style" class="fade in alert-dismissible" role="alert">
     <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
       <span aria-hidden="true">&times;</span>
     </button>

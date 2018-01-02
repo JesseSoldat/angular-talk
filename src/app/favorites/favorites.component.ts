@@ -7,6 +7,7 @@ import Movie from '../models/movie';
 import { getScroll } from '../shared/helper-functions';
 import { Subscription } from 'rxjs/Subscription';
 import { cloneDeep } from 'lodash';
+import { createMessageObj } from '../shared/helper-functions';
 
 @Component({
   selector: 'app-favorites',
@@ -49,6 +50,9 @@ export class FavoritesComponent implements OnInit, OnDestroy {
       this.spinner = false;
       console.log('getFavorites from API');
       this.favorites = cloneDeep(data.reverse());
+    }, err => {
+      const errObj = createMessageObj(err.message, 'danger');
+      this.dataStoreService.changeAlert(errObj);
     }); 
   }
 
@@ -56,6 +60,7 @@ export class FavoritesComponent implements OnInit, OnDestroy {
     let position = getScroll(); //returns [x, y]
     this.dataStoreService.changeCurrentMovie(movie);
     this.favoritesCached = true;
+    this.dataStoreService.clearAlert();
     this.dataStoreService.changeCurrentFavorites(this.favorites);
     this.dataStoreService.changeScrollPosition(position);
     this.dataStoreService.changeNavFrom('favorites');

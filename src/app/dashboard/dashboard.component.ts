@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { hoverPanelTrigger } from './dashboard.animations';
+import { DataStoreService } from '../services/data-store.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,10 +17,11 @@ export class DashboardComponent {
   //Modal
   showModal = false;
   
-
-  constructor(private router: Router) {}
+  constructor(private router: Router,
+              private dataStoreService: DataStoreService) {}
 
   onNavigate(route) {
+    this.dataStoreService.clearAlert();
     this.router.navigate([route]);
   }
   updateHover(num, hoverState) {
@@ -37,6 +39,7 @@ export class DashboardComponent {
   }
 
   onSearchUsersMovies() {
+    this.dataStoreService.clearAlert();
     this.showModal = true;
   }
 
