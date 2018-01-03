@@ -20,7 +20,8 @@ export class DashboardComponent {
   constructor(private router: Router,
               private dataStoreService: DataStoreService) {}
 
-  onNavigate(route) {
+  onNavigate(route, e) {
+    e.preventDefault();
     this.dataStoreService.clearAlert();
     this.router.navigate([route]);
   }

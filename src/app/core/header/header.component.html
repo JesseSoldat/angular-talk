@@ -10,8 +10,10 @@
         <span class="icon-bar"></span>
       </button>
       <a href="#" 
+        routerLinkActive="active7"
         (click)="onNavigate($event, '')"
-        class="navbar-brand">
+        class="navbar-brand"
+         [ngStyle]="getLinkStyle('')">
         Movie Buddy
       </a>
 
@@ -19,7 +21,9 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <a href="#" *ngIf="uid != null" (click)="onNavigate($event, 'dashboard')">
+          <a href="#" *ngIf="uid != null" 
+          (click)="onNavigate($event, 'dashboard')"
+           [ngStyle]="getLinkStyle('dashboard')">
             Dashboard
           </a>
         </li>
@@ -27,6 +31,7 @@
           <a href="#" 
             *ngIf="uid === null"
             (click)="onNavigate($event, 'register')"
+             [ngStyle]="getLinkStyle('register')"
           >Register
           </a>
         </li>
@@ -34,19 +39,23 @@
           <a href="#"
             *ngIf="uid === null"
            (click)="onNavigate($event, 'login')"
+           [ngStyle]="getLinkStyle('login')"
           >Login</a>
         </li>
         <li>
           <a href="#" 
             *ngIf="uid != null"
-            (click)="onNavigate($event, 'search')">
+            (click)="onNavigate($event, 'search')"
+             [ngStyle]="getLinkStyle('search')"
+            >
             Search
           </a>
         </li>
         <li>
           <a href="#" 
             *ngIf="uid != null"
-            (click)="onNavigate($event, 'favorites')">
+            (click)="onNavigate($event, 'favorites')"
+             [ngStyle]="getLinkStyle('favorites')">
             Favorites
           </a>
         </li>

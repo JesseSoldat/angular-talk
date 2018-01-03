@@ -12,6 +12,7 @@ import { SearchService } from '../services/search.service';
 import { AuthService } from '../services/auth.service';
 import { DataStoreService } from '../services/data-store.service';
 import { FavoritesService } from '../services/favorites.service';
+import { FavoritesResolver } from '../services/favorites.resolver';
 //Components
 import { HeaderComponent } from './header/header.component';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -48,7 +49,8 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
     AuthService,
     SearchService,
     FavoritesService,
-    DataStoreService
+    DataStoreService,
+    FavoritesResolver
 
   ]
 })

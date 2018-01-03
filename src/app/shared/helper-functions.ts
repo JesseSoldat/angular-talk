@@ -1,6 +1,6 @@
 import { alertMessages } from '../models/message.enum';
 
-export let getScroll = function () {
+export let getScroll = () => {
   if (window.pageYOffset != undefined) {
     return [pageXOffset, pageYOffset];
   }
@@ -12,7 +12,7 @@ export let getScroll = function () {
   }
 }
 
-export let createMessageObj(message, type) {
+export let createMessageObj = (message, type) => {
   return {
     message,
     type,
@@ -20,6 +20,6 @@ export let createMessageObj(message, type) {
   }
 }
 
-export let capitalize(string) {
+export let capitalize = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }

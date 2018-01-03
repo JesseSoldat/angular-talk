@@ -16,3 +16,5 @@ export const enterImageTrigger = trigger('enterImage', [
   transition('* => default', animate('900ms ease-in')),
 ]);
 
+// transform: 'translateX(-100%)'
+// transform: 'translateX(0%)'

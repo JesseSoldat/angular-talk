@@ -26,6 +26,18 @@ export class FavoritesService {
     });
   }
 
+  getFavoritesResolve() {
+    // return { name: 'Jesse'}; 
+    const uid = this.authService.getUid();
+    const ref = `moviedb/users/${uid}/movies`;
+    let movies = this.afDb.list(ref) as AngularFireList<Movie[]>;
+  
+    return movies.snapshotChanges().map(actions => {
+      return actions.map(action => ({ key: action.key, ...action.payload.val() }));
+    });
+ 
+  }
+
   addToFavorites(m: Movie) { 
     const movie: Movie = this.createMovie(m);
     const uid = this.authService.getUid();

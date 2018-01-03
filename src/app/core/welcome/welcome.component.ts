@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { enterTitleTrigger, enterImageTrigger } from './welcome.animations';
+import { DataStoreService } from '../../services/data-store.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-welcome',
@@ -11,14 +13,31 @@ import { enterTitleTrigger, enterImageTrigger } from './welcome.animations';
     enterImageTrigger
   ]
 })
-export class WelcomeComponent implements OnInit {
-  titleState = 'default';
-  imageState = 'default';
+export class WelcomeComponent implements OnInit, OnDestroy {
+  routerAnimationStatusSubscription: Subscription;
+  titleState;
+  imageState;
 
-  constructor() { }
+  constructor(private dataStoreService: DataStoreService) { }
 
   ngOnInit() {
-  
+    
+    this.routerAnimationStatusSubscription = this.dataStoreService.routerAnimationStatus$
+      .subscribe(status => {
+      if(status) {
+        this.animateTitleImage();
+      }
+    }); 
+  }
+
+  animateTitleImage() {
+    console.log('animate welcome');
+    this.titleState = 'default';
+    this.imageState = 'default';
+  }
+
+  ngOnDestroy() {
+    this.routerAnimationStatusSubscription.unsubscribe();
   }
 
 }

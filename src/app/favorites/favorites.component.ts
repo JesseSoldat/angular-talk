@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FavoritesService } from '../services/favorites.service';
 import { DataStoreService } from '../services/data-store.service';
 import { Observable } from 'rxjs/Observable';
@@ -8,6 +8,7 @@ import { getScroll } from '../shared/helper-functions';
 import { Subscription } from 'rxjs/Subscription';
 import { cloneDeep } from 'lodash';
 import { createMessageObj } from '../shared/helper-functions';
+
 
 @Component({
   selector: 'app-favorites',
@@ -29,20 +30,32 @@ export class FavoritesComponent implements OnInit, OnDestroy {
   filterListBy: string;
 
   constructor(private router: Router,
+              private route: ActivatedRoute,
               private favoritesService: FavoritesService,
               private dataStoreService: DataStoreService) {}
 
   ngOnInit() { 
+
     this.currentFavoritesSubscription = this.dataStoreService.currentFavorites$.subscribe(currentFavorites => {
       if(currentFavorites === null) {
         this.favoritesCached = false;
         this.getFavoritesFromApi();
+        this.resolveFavorites();
         return;
       }
       this.spinner = false;
       this.favoritesCached = true;
       this.favorites = currentFavorites;
     });   
+  }
+
+  resolveFavorites() {
+    this.route.data.subscribe(results => {
+    
+        console.log(results);
+        this.spinner = false;
+
+    });
   }
 
   getFavoritesFromApi() {

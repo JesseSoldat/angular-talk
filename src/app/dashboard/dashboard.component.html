@@ -12,11 +12,13 @@
            (mouseenter)="updateHover('1', 'hover')" 
            (mouseleave)="updateHover('1', 'default')">
           <p>Search the ____ api for movies to add to your favorites collection.</p>
-          <button class="btn btn-primary"
-            (click)="onNavigate('search')"
+          <a class="btn btn-primary"
+            href="#"
+            (click)="onNavigate('search', $event)"
+            type="button"
           >
             Search
-          </button>
+          </a>
         </div>
       </div>
     </div>
@@ -31,10 +33,12 @@
            (mouseenter)="updateHover('2', 'hover')" 
            (mouseleave)="updateHover('2', 'default')">
           <p>Look through your list of favorites movies to help you decide what to watch tonight.</p>
-          <button class="btn btn-primary"
-             (click)="onNavigate('favorites')">
+          <a class="btn btn-primary"
+           href="#"
+            type="button"
+             (click)="onNavigate('favorites', $event)">
             Favorites
-          </button>
+          </a>
         </div>
       </div>
     </div>
@@ -50,10 +54,10 @@
          (mouseleave)="updateHover('3', 'default')"
         >
           <p>See what other users like to help you build a more diverse list of movies.</p>
-          <button class="btn btn-primary"
+          <a type="button" class="btn btn-primary"
              (click)="onSearchUsersMovies()">
             Others Favorites
-          </button>
+          </a>
         </div>
       </div>
     </div>

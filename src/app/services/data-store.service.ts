@@ -29,6 +29,12 @@ export class DataStoreService {
   private scrollPosition = new BehaviorSubject([0, 0]);
   public readonly scrollPosition$: Observable<number[]> = this.scrollPosition.asObservable();
 
+  private routerAnimationStatus = new BehaviorSubject(false);
+  public readonly routerAnimationStatus$: Observable<boolean> = this.routerAnimationStatus.asObservable();
+
+  private activeClass = new BehaviorSubject(null);
+  public readonly activeClass$: Observable<string> = this.activeClass.asObservable();
+
   public matchedUid: string;
   public matchedName: string;
 
@@ -73,6 +79,14 @@ export class DataStoreService {
   changeScrollPosition(position: number[]) {
     let copiedPosition = position.slice();
     this.scrollPosition.next(copiedPosition);
+  }
+
+  changeRouterAnimationStatus(status: boolean) {
+    this.routerAnimationStatus.next(status);
+  }
+
+  changeActiveClass(link) {
+    this.activeClass.next(link);
   }
 
   
