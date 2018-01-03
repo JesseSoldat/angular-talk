@@ -15,6 +15,6 @@ export class FavoritesResolver implements Resolve<any> {
   resolve(route: ActivatedRouteSnapshot,
           state: RouterStateSnapshot) {
    
-    return this.favoritesService.getFavoritesResolve().subscribe(data => data);
+    return {};
   }
 }

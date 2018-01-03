@@ -29,7 +29,10 @@
             </span>
         </div>
         <div class="form-group">
-          <button class="btn btn-primary" type="submit" [disabled]="!f.form.valid">
+          <button class="btn btn-primary" 
+          type="submit"
+          [@buttonState]="f.valid ? 'valid' : 'invalid'" 
+          [disabled]="!f.form.valid">
             Submit
           </button>
         </div>

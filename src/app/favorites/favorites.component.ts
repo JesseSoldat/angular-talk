@@ -9,7 +9,6 @@ import { Subscription } from 'rxjs/Subscription';
 import { cloneDeep } from 'lodash';
 import { createMessageObj } from '../shared/helper-functions';
 
-
 @Component({
   selector: 'app-favorites',
   templateUrl: './favorites.component.html',
@@ -35,7 +34,6 @@ export class FavoritesComponent implements OnInit, OnDestroy {
               private dataStoreService: DataStoreService) {}
 
   ngOnInit() { 
-
     this.currentFavoritesSubscription = this.dataStoreService.currentFavorites$.subscribe(currentFavorites => {
       if(currentFavorites === null) {
         this.favoritesCached = false;
@@ -50,11 +48,9 @@ export class FavoritesComponent implements OnInit, OnDestroy {
   }
 
   resolveFavorites() {
-    this.route.data.subscribe(results => {
-    
-        console.log(results);
-        this.spinner = false;
-
+    this.route.data.subscribe(results => { 
+        // console.log(results);
+        // this.spinner = false;
     });
   }
 

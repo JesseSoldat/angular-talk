@@ -1,7 +1,6 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 export const fadeinTrigger = trigger('fadein', [
-
   transition('void => *', [
     style({
       opacity: 0

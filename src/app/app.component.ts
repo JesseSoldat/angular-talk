@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
-import { routerTransition } from './shared/animations/router.animation';
+import { routerTransitionTrigger } from './shared/animations/router.animation';
 import { DataStoreService } from './services/data-store.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
@@ -12,7 +12,7 @@ import { AnimationEvent } from '@angular/animations';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  animations: [routerTransition],
+  animations: [routerTransitionTrigger],
 })
 export class AppComponent implements OnInit {
   activeClass$: Observable<string>;
@@ -67,6 +67,8 @@ export class AppComponent implements OnInit {
 // }); 
 
   getState(outlet) {
+    // console.log(outlet.activatedRouteData.state);
+    //the route dashboard / search etc....
     return outlet.activatedRouteData.state;
   }
 
