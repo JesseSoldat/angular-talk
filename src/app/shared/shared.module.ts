@@ -11,6 +11,8 @@ import { ModalComponent } from './modal/modal.component';
 //PIPES
 import { FilterListPipe } from '../pipes/FilterList';
 
+import './rxjs-extensions';
+
 
 @NgModule({
   declarations: [

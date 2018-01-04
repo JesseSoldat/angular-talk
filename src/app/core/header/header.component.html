@@ -23,47 +23,36 @@
         <li>
           <a href="#" *ngIf="uid != null" 
           (click)="onNavigate($event, 'dashboard')"
-           [ngStyle]="getLinkStyle('dashboard')">
-            Dashboard
+           [ngStyle]="getLinkStyle('dashboard')">Dashboard
           </a>
         </li>
         <li>
-          <a href="#" 
-            *ngIf="uid === null"
+          <a href="#" *ngIf="uid === null"
             (click)="onNavigate($event, 'register')"
-             [ngStyle]="getLinkStyle('register')"
-          >Register
+             [ngStyle]="getLinkStyle('register')">Register
           </a>
         </li>
         <li>
-          <a href="#"
-            *ngIf="uid === null"
+          <a href="#" *ngIf="uid === null"
            (click)="onNavigate($event, 'login')"
-           [ngStyle]="getLinkStyle('login')"
-          >Login</a>
+           [ngStyle]="getLinkStyle('login')">Login</a>
         </li>
         <li>
-          <a href="#" 
-            *ngIf="uid != null"
+          <a href="#" *ngIf="uid != null"
             (click)="onNavigate($event, 'search')"
-             [ngStyle]="getLinkStyle('search')"
-            >
-            Search
+             [ngStyle]="getLinkStyle('search')">Search
           </a>
         </li>
         <li>
-          <a href="#" 
-            *ngIf="uid != null"
+          <a href="#" *ngIf="uid != null"
             (click)="onNavigate($event, 'favorites')"
              [ngStyle]="getLinkStyle('favorites')">
             Favorites
           </a>
         </li>
         <li>
-          <a href="#" 
-          *ngIf="uid !== null" 
-          (click)="onLogout($event)">
-            Logout
+          <a href="#" *ngIf="uid !== null" 
+          (click)="onLogout($event)">Logout
           </a>
         </li>
       </ul>
