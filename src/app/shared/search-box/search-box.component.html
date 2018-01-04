@@ -2,14 +2,10 @@
   <div class="col-xs-12">
     <form>
       <div class="form-group-inline col-xs-9 col-sm-6">
-        <input type="text" #search>
         <input type="text" 
-          
+          #search
           class="form-control"
-           [placeholder]="placeholder"
-           [(ngModel)]="searchStr" 
-           name="searchStr"
-           (ngModelChange)="onChange()">
+          [placeholder]="placeholder">
       </div>
       <div class="col-xs-3 col-sm-6">
           <ng-content></ng-content>

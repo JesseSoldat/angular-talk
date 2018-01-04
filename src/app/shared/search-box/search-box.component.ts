@@ -1,47 +1,41 @@
-import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/observable/fromEvent';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-search-box',
   templateUrl: './search-box.component.html',
   styleUrls: ['./search-box.component.scss']
 })
-export class SearchBoxComponent implements AfterViewInit {
+export class SearchBoxComponent implements AfterViewInit, OnDestroy {
   @Input() parent: string;
   @Input() placeholder: string;
   @Output() onSearchDatabase = new EventEmitter();
   @Output() onFilterText = new EventEmitter();
   @ViewChild('search') search: ElementRef;
-
-  keyUps$;
-  queries$;
-  searchStr: string; //ngModel
+  queriesSubscription: Subscription;
+  keyUps$: Observable<KeyboardEvent>;
+  queries$: Observable<KeyboardEvent>;
 
   ngAfterViewInit() {
-    this.keyUps$ = Observable.fromEvent<KeyboardEvent>(this.search.nativeElement, 'keyup');
+    this.keyUps$ = Observable.fromEvent(this.search.nativeElement, 'keyup');
     this.queries$ = this.keyUps$.map((e:any) => e.target.value)
-      .do((value) => console.log(value))
       .distinctUntilChanged()
-      .debounceTime(250);
+      .debounceTime(300);
 
-    this.queries$.subscribe(query => {
-      // console.log(query);
-    })
+    this.queriesSubscription = this.queries$.subscribe(query => {
+      if (this.parent === 'search') {
+        this.onSearchDatabase.emit(query);
+      }
+      if (this.parent === 'favorites') {
+        this.onFilterText.emit(query);
+      }   
+    });
   }
 
-  onChange() {
-    if(this.parent === 'search') {
-      this.onSearchDatabase.emit(this.searchStr);
-    }
-    if( this.parent === 'favorites') {
-      this.onFilterText.emit(this.searchStr);
-    }   
+  ngOnDestroy() {
+    this.queriesSubscription.unsubscribe();
   }
 
-  
+ 
 }
