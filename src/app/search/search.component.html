@@ -5,8 +5,7 @@
       <app-search-box 
         parent="search"
         placeholder="Search the database..." 
-        (onSearchDatabase)="searchDatabase($event)"
-      >
+        (onSearchDatabase)="searchDatabase($event)">
       </app-search-box>
     </div>
   </div>
@@ -16,10 +15,9 @@
       *ngFor="let movie of currentSearchResults">
       <app-card
         [movie]="movie"
-        [heart]="heart"
+        [icon]="icon"
         (onAddToFavorites)="onAddToFavorites($event)"
-        (onGetMovieDetails)="getMovieDetails($event)"
-      >
+        (onGetMovieDetails)="getMovieDetails($event)">
       </app-card>
     </div>
   </div>

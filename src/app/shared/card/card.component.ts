@@ -11,7 +11,7 @@ import { hoverImageTrigger } from './card.animation';
 })
 export class CardComponent {
   @Input() movie;
-  @Input() heart;
+  @Input() icon: string;
   @Output() onAddToFavorites = new EventEmitter();
   @Output() onDeleteFromFavorites = new EventEmitter();
   @Output() onGetMovieDetails = new EventEmitter();

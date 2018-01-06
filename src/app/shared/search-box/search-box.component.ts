@@ -13,17 +13,16 @@ export class SearchBoxComponent implements AfterViewInit, OnDestroy {
   @Output() onSearchDatabase = new EventEmitter();
   @Output() onFilterText = new EventEmitter();
   @ViewChild('search') search: ElementRef;
-  queriesSubscription: Subscription;
+  keyUpsSubscription: Subscription;
   keyUps$: Observable<KeyboardEvent>;
-  queries$: Observable<KeyboardEvent>;
 
   ngAfterViewInit() {
-    this.keyUps$ = Observable.fromEvent(this.search.nativeElement, 'keyup');
-    this.queries$ = this.keyUps$.map((e:any) => e.target.value)
+    this.keyUps$ = Observable.fromEvent(this.search.nativeElement, 'keyup')
+      .map((e:any) => e.target.value)
       .distinctUntilChanged()
       .debounceTime(300);
 
-    this.queriesSubscription = this.queries$.subscribe(query => {
+    this.keyUpsSubscription = this.keyUps$.subscribe(query => {
       if (this.parent === 'search') {
         this.onSearchDatabase.emit(query);
       }
@@ -34,7 +33,7 @@ export class SearchBoxComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.queriesSubscription.unsubscribe();
+    this.keyUpsSubscription.unsubscribe();
   }
 
  

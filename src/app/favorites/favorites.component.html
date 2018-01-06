@@ -51,7 +51,7 @@
       *ngFor="let movie of (favorites | filterList:filterListBy)">
       <app-card 
         [movie]="movie"
-        [heart]="heart"
+        [icon]="icon"
         (onDeleteFromFavorites)="onDeleteFromFavorites($event)"
         (onGetMovieDetails)="getMovieDetails($event)">
       </app-card>
@@ -61,6 +61,5 @@
 
   <app-modal 
     [showModal]="showModal"
-    (onHideModal)="onHideModal()"
-  >
+    (onHideModal)="onHideModal()">
   </app-modal>

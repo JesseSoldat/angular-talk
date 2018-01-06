@@ -9,7 +9,6 @@ import { AuthService } from '../../services/auth.service';
 })
 
 export class RegisterComponent {
- 
   constructor(private authService: AuthService) {}
 
   formSubmitted({email, password}) {

@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @Input() activeClass: string;
   uid = null;
   subscription: Subscription;
-  linkStyle;
+  linkStyle: {'color': string};
 
   constructor(private router: Router,
               private authService: AuthService,
@@ -25,7 +25,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.authService.getUser();
-
     this.subscription = this.authService.uid$.subscribe(uid => {
       this.uid = uid; 
       if(this.uid === null) {
@@ -51,8 +50,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   getLinkStyle(linkText) {
     return this.linkStyle = {
       'color': linkText === this.activeClass ? '#18bc9c' : 'white',
-      };
-    
+      }; 
   }
 
   onNavigate(e, route) {

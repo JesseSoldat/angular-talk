@@ -29,13 +29,11 @@ export class ModalComponent implements OnInit, OnChanges {
   ngOnInit() {
     jQuery('#myModal').on('hide.bs.modal', () => {
       this.onHideModal.emit();
-      // this.closeModal();
     });
   }
 
   ngOnChanges(changes) {
     if(changes['showModal']) {
-      // console.log(changes);
       if(changes['showModal']['currentValue'] === true) {
         jQuery('#myModal').modal('show');
         this.searchUsersList();

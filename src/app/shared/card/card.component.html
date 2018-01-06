@@ -1,15 +1,13 @@
-<div class="movieCard">
+<div class="movieCard" *ngIf="movie">
   <h4 class="movieTitle">
     {{movie.title}}
   </h4>
   <img 
-    *ngIf="movie && movie.poster_path"
-    
+    *ngIf="movie && movie.poster_path"  
      [@hoverImage]="hoverImage"
      (mouseover)="updateHoverImage('hover')"
      (mouseout)="updateHoverImage('default')"     
     src="http://image.tmdb.org/t/p/w500/{{movie.poster_path}}" 
-    alt="" 
     class="thumbnail movieImage"
   >
   <img *ngIf="!movie || !movie.poster_path"
@@ -19,7 +17,7 @@
   <div class="movieInfoGroup">
     <div class="movieBtnGroup">
       <button 
-       *ngIf="!heart"
+       *ngIf="icon === 'heart'"
         class="btn btn-secondary pull-right"
         (click)="addToFavorites(movie.id)"
          [disabled]="disabled">
@@ -27,7 +25,7 @@
         <i class="fa fa-heart fa-1.5x redHeart"></i>
       </button>
 
-      <button *ngIf="heart"
+      <button *ngIf="icon === 'trash'"
         class="btn btn-secondary pull-right"
         (click)="deleteFromFavorites(movie)"
         [disabled]="disabled">

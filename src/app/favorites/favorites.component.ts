@@ -19,14 +19,10 @@ export class FavoritesComponent implements OnInit, OnDestroy {
   currentFavoritesSubscription: Subscription;
   favorites: Movie[];
   spinner = true;
-  heart = true;
+  icon = 'trash';
   favoritesCached = false;
-
-  //Modal
   showModal = false;
-
-  //PIPES
-  filterListBy: string;
+  filterListBy: string;   //PIPES
 
   constructor(private router: Router,
               private route: ActivatedRoute,

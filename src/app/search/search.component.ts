@@ -18,7 +18,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   searchResultsSubscription: Subscription;
   favorites: Movie[];
   favoritesSubscription: Subscription;
-  heart = false;
+  icon = 'heart';
 
   constructor(private router: Router,
               private searchService: SearchService,
