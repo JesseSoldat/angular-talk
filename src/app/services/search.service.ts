@@ -4,6 +4,7 @@ import { Jsonp } from '@angular/http';
 import { API_KEY } from '../config';
 //Firebase
 import { AngularFireDatabase } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class SearchService {
@@ -17,12 +18,18 @@ export class SearchService {
 
     searchMovies(term: string) {
       return this.jsonp.get(`${this.baseUrl}search/movie?query=${term}&${this.popular}&api_key=${this.apiKey}&${this.callBack}`)
-        .map(response => response.json());
+        .map(response => response.json())
+        .catch(err => {
+          return Observable.empty();   
+        });
     }
   
     searchMovie(id: string) {
       return this.jsonp.get(`${this.baseUrl}movie/${id}?api_key=${this.apiKey}&${this.callBack}`)
-        .map(response => response.json());
+        .map(response => response.json())
+        .catch(err => {
+          return Observable.empty();
+        });
     }
 
     

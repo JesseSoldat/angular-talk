@@ -50,6 +50,8 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.searchService.searchMovies(searchText).subscribe(response => {
       let results = this.compareSearchedWithFavorites(response.results);
       this.dataStoreService.changeCurrentSearch(results);
+    }, err => {
+      console.log(err);
     });
   }
 
