@@ -20,8 +20,7 @@ export class MatchedUserComponent implements OnInit, OnDestroy {
   matchedName: string;
   unMatchedMovieIds: number[];
   unMatchedMovies: Movie[];
-
-  heart = false;
+  icon = 'heart';
  
   constructor(private router: Router,
               private route: ActivatedRoute,
